@@ -1,0 +1,3408 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
+@import "./atelier.css";
+
+:root {
+  --ink: #15171d;
+  --paper: #f8f8f5;
+  --white: #ffffff;
+  --line: #dfe1e5;
+  --muted: #737a87;
+  --blue: #3346ff;
+  --lime: #c8f15c;
+  --red: #ef8d7b;
+  --easy: cubic-bezier(0.23, 1, 0.32, 1);
+  --mobile-overlay-clearance: max(
+    72px,
+    calc(env(safe-area-inset-bottom) + 56px)
+  );
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  min-height: 100%;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: "Space Grotesk", sans-serif;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid rgba(51, 70, 255, 0.38);
+  outline-offset: 3px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 10px;
+  left: 10px;
+  padding: 10px 13px;
+  color: var(--paper-sheet, var(--white));
+  background: var(--ink);
+  border-radius: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 160ms var(--easy);
+}
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--lime);
+  outline-offset: 3px;
+}
+a[target="_blank"]::after {
+  content: " ↗";
+  display: inline-block;
+  margin-left: 2px;
+  font-size: 0.9em;
+  text-decoration: none;
+}
+
+.theme-toggle {
+  position: fixed;
+  z-index: 40;
+  top: 27px;
+  right: clamp(106px, 12vw, 164px);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 9px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--white) 86%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  box-shadow: 0 4px 14px rgba(21, 23, 29, 0.07);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+.theme-toggle:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+.theme-toggle svg {
+  color: var(--blue);
+}
+
+.motif-app {
+  min-height: 100vh;
+  background: var(--paper);
+}
+.game-launcher {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 5vw, 72px);
+  background:
+    linear-gradient(rgba(21, 23, 29, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 23, 29, 0.035) 1px, transparent 1px),
+    var(--paper);
+  background-size: 28px 28px;
+}
+.launcher-brand,
+.stage-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.07em;
+}
+.launcher-brand span,
+.stage-logo span {
+  width: 29px;
+  height: 29px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--lime);
+  border-radius: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+}
+.launcher-copy {
+  width: min(100%, 880px);
+  margin: auto auto 36px;
+}
+.launcher-copy p {
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.launcher-copy h1 {
+  margin: 0;
+  font-size: clamp(56px, 9vw, 130px);
+  font-weight: 600;
+  letter-spacing: -0.09em;
+  line-height: 0.82;
+}
+.launcher-copy h1 em {
+  color: var(--blue);
+  font-style: normal;
+}
+.mode-choices {
+  width: min(100%, 880px);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin: 0 auto;
+}
+.mode-choice {
+  min-height: 250px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  overflow: hidden;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+  transition:
+    transform 200ms var(--easy),
+    border-color 200ms var(--easy),
+    box-shadow 200ms var(--easy);
+}
+.mode-choice:hover {
+  border-color: var(--ink);
+  box-shadow: 8px 8px 0 var(--ink);
+  transform: translate(-4px, -4px);
+}
+.mode-choice svg {
+  margin-top: 14px;
+  color: var(--blue);
+}
+.mode-choice h2 {
+  margin: 20px 0 8px;
+  font-size: clamp(30px, 4vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.075em;
+  line-height: 0.88;
+}
+.mode-choice p {
+  max-width: 230px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.mode-number {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+.choice-arrow {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  color: var(--ink) !important;
+}
+.motus-choice-card {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+.motus-choice-card:hover {
+  border-color: var(--ink);
+  box-shadow: 8px 8px 0 var(--blue);
+}
+.motus-choice-card svg {
+  color: var(--lime);
+}
+.motus-choice-card p,
+.motus-choice-card .mode-number {
+  color: #b9c0cb;
+}
+.motus-choice-card .choice-arrow {
+  color: var(--lime) !important;
+}
+.launcher-foot {
+  width: min(100%, 880px);
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+
+.game-stage {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(20px, 4vw, 50px);
+  background: var(--paper);
+}
+.stage-logo {
+  position: absolute;
+  z-index: 5;
+  top: 28px;
+  left: clamp(56px, 10vw, 136px);
+  font-size: 17px;
+}
+.stage-logo span {
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+}
+.back-control {
+  position: absolute;
+  top: 28px;
+  right: clamp(20px, 4vw, 50px);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+.back-control:hover {
+  border-color: var(--ink);
+}
+.stage-loading,
+.stage-error {
+  width: min(100%, 880px);
+  min-height: 500px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 13px;
+  margin: auto;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 13px;
+}
+.stage-error button {
+  padding: 9px 12px;
+  color: var(--white);
+  background: var(--ink);
+  border: 0;
+  border-radius: 6px;
+}
+.quiz-play,
+.motus-play {
+  width: min(100%, 880px);
+  margin: auto;
+}
+.play-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: clamp(32px, 6vh, 60px);
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.quiz-main h1,
+.motus-title h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 600;
+  letter-spacing: -0.09em;
+  line-height: 0.87;
+}
+.quiz-main h1 em,
+.motus-title h1 em {
+  color: var(--blue);
+  font-style: normal;
+}
+.mini-label {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.quiz-question {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+.answer-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-top: 35px;
+}
+.answer-choice {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: left;
+  transition:
+    border-color 150ms var(--easy),
+    background 150ms var(--easy),
+    transform 150ms var(--easy);
+}
+.answer-choice:not(:disabled):hover {
+  border-color: var(--blue);
+  background: #f4f5ff;
+  transform: translateY(-2px);
+}
+.answer-choice span {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  color: var(--blue);
+  background: #e9ebff;
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+}
+.answer-choice b {
+  flex: 1;
+  font-size: 14px;
+}
+.answer-choice.is-correct {
+  background: #f2ffd8;
+  border-color: #a4ce47;
+}
+.answer-choice.is-wrong {
+  background: #fff0ee;
+  border-color: #e7a094;
+}
+.play-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 25px;
+}
+.play-footer p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.refresh-game {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 13px;
+  color: var(--white);
+  background: var(--ink);
+  border: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.refresh-game:hover {
+  background: var(--blue);
+}
+
+.motus-title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+}
+.word-length {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  flex: 0 0 auto;
+  color: var(--white);
+  background: var(--blue);
+  border-radius: 9px;
+}
+.word-length b {
+  font-size: 31px;
+  line-height: 0.9;
+}
+.word-length span {
+  margin-top: 3px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.motus-grid {
+  display: grid;
+  justify-content: center;
+  gap: 7px;
+  margin: 38px auto 0;
+}
+.motus-cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: clamp(17px, 3vw, 26px);
+  text-transform: uppercase;
+}
+.motus-cell.state-exact {
+  color: var(--white);
+  background: #087443;
+  border-color: #087443;
+}
+.motus-cell.state-present {
+  color: #372900;
+  background: #f7c948;
+  border-color: #f7c948;
+}
+.motus-cell.state-absent {
+  color: var(--white);
+  background: #6d7785;
+  border-color: #6d7785;
+}
+.motus-help {
+  margin: 17px 0 0;
+  color: var(--muted);
+  font-size: 10px;
+  text-align: center;
+}
+.motus-help kbd {
+  padding: 2px 4px;
+  color: var(--blue);
+  background: #e9ebff;
+  border-radius: 3px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.motus-entry {
+  display: flex;
+  gap: 8px;
+  max-width: 520px;
+  margin: 15px auto 0;
+}
+.motus-entry input {
+  min-width: 0;
+  flex: 1;
+  height: 48px;
+  padding: 0 13px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.motus-entry input:focus {
+  border-color: var(--blue);
+}
+.motus-entry button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 15px;
+  color: var(--white);
+  background: var(--ink);
+  border: 0;
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.motus-entry button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.motus-message {
+  min-height: 16px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+.keyboard {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5px;
+  max-width: 600px;
+  margin: 20px auto 0;
+}
+.key {
+  width: 31px;
+  height: 31px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background: #e9ebef;
+  border: 0;
+  border-radius: 5px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+}
+.key:hover {
+  background: #d9ddff;
+}
+.key-exact {
+  color: var(--white);
+  background: #087443;
+}
+.key-present {
+  color: #372900;
+  background: #f7c948;
+}
+.key-absent {
+  color: var(--white);
+  background: #6d7785;
+}
+.key-wide {
+  width: 43px;
+}
+.key-enter {
+  color: var(--white);
+  background: var(--blue);
+}
+.motus-result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 14px;
+  background: #f2ffd8;
+  border: 1px solid #a4ce47;
+  border-radius: 8px;
+}
+.motus-result.lost {
+  background: #fff0ee;
+  border-color: #e7a094;
+}
+.motus-result p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+@media (max-width: 650px) {
+  .game-launcher {
+    padding: 20px;
+  }
+  .launcher-copy {
+    margin: auto 0 30px;
+  }
+  .launcher-copy h1 {
+    font-size: clamp(53px, 17vw, 82px);
+  }
+  .mode-choices {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .mode-choice {
+    min-height: 175px;
+    padding: 20px;
+  }
+  .mode-choice h2 {
+    margin: 13px 0 5px;
+    font-size: 37px;
+  }
+  .mode-choice svg {
+    margin-top: 10px;
+  }
+  .launcher-foot {
+    margin: 15px 0 0;
+  }
+  .game-stage {
+    padding: 18px 16px calc(32px + var(--mobile-overlay-clearance));
+  }
+  .stage-logo {
+    top: 18px;
+    left: clamp(48px, 12vw, 64px);
+  }
+  .back-control {
+    top: 18px;
+    right: 16px;
+  }
+  .quiz-play,
+  .motus-play {
+    margin-top: 94px;
+  }
+  .play-meta {
+    margin-bottom: 28px;
+  }
+  .quiz-main h1,
+  .motus-title h1 {
+    font-size: clamp(46px, 14vw, 66px);
+  }
+  .answer-list {
+    grid-template-columns: 1fr;
+    margin-top: 27px;
+  }
+  .play-footer {
+    align-items: flex-start;
+    flex-direction: column-reverse;
+  }
+  .play-footer .refresh-game {
+    align-self: stretch;
+    justify-content: center;
+  }
+  .word-length {
+    width: 62px;
+    height: 62px;
+  }
+  .motus-grid {
+    gap: 5px;
+    margin-top: 30px;
+  }
+  .motus-entry {
+    margin-top: 13px;
+  }
+  .keyboard {
+    gap: 4px;
+  }
+  .key {
+    width: 28px;
+    height: 28px;
+    font-size: 9px;
+  }
+  .key-wide {
+    width: 40px;
+  }
+  .motus-result {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .motus-result .refresh-game {
+    width: 100%;
+    justify-content: center;
+  }
+}
+.cnrtl-term {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0;
+  text-decoration: none;
+  text-transform: none;
+}
+.cnrtl-term:hover {
+  text-decoration: underline;
+}
+.game-mode-switch {
+  display: flex;
+  width: fit-content;
+  gap: 4px;
+  padding: 4px;
+  margin: -19px 0 29px;
+  background: #eceef2;
+  border-radius: 8px;
+}
+.game-mode-switch button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  padding: 7px 10px;
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+  text-align: left;
+}
+.game-mode-switch button b {
+  font-size: 11px;
+}
+.game-mode-switch button span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+}
+.game-mode-switch button.is-active {
+  color: var(--ink);
+  background: var(--white);
+  box-shadow: 0 1px 4px rgba(21, 23, 29, 0.12);
+}
+.quiz-main h1 i {
+  font-style: normal;
+}
+.binary-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 560px;
+}
+.motus-mode-switch {
+  margin: -19px 0 28px;
+}
+.motus-mode-switch button {
+  min-width: 88px;
+}
+@media (max-width: 650px) {
+  .play-meta {
+    align-items: flex-start;
+    gap: 9px;
+    flex-direction: column;
+  }
+  .cnrtl-term {
+    max-width: 100%;
+  }
+  .game-mode-switch {
+    width: 100%;
+    margin: -13px 0 24px;
+  }
+  .game-mode-switch button {
+    flex: 1;
+    min-width: 0;
+  }
+  .motus-mode-switch button {
+    min-width: 0;
+  }
+  .binary-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.mode-setup {
+  width: min(100%, 720px);
+  margin: auto;
+}
+.mode-setup h1 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(54px, 8vw, 94px);
+  font-weight: 600;
+  letter-spacing: -0.09em;
+  line-height: 0.87;
+}
+.mode-setup h1 em {
+  color: var(--blue);
+  font-style: normal;
+}
+.mode-setup > p:not(.mini-label) {
+  margin: 18px 0 27px;
+  color: var(--muted);
+  font-size: 15px;
+}
+.setup-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+  margin-bottom: 19px;
+}
+.setup-options button {
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 16px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: left;
+  transition:
+    border-color 160ms var(--easy),
+    transform 160ms var(--easy),
+    box-shadow 160ms var(--easy);
+}
+.setup-options button:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+.setup-options button.is-active {
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.setup-options b {
+  font-size: 19px;
+  letter-spacing: -0.05em;
+}
+.setup-options span {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+.motus-setup-options {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.setup-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 15px;
+  color: var(--white);
+  background: var(--ink);
+  border: 0;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.setup-start:hover {
+  background: var(--blue);
+}
+@media (max-width: 650px) {
+  .mode-setup {
+    margin-top: 90px;
+  }
+  .mode-setup h1 {
+    font-size: clamp(47px, 14vw, 66px);
+  }
+  .setup-options {
+    grid-template-columns: 1fr;
+  }
+  .motus-setup-options {
+    grid-template-columns: 1fr;
+  }
+  .setup-options button {
+    min-height: 77px;
+    flex-direction: row;
+    align-items: center;
+  }
+  .setup-options b {
+    font-size: 17px;
+  }
+  .setup-start {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.multiplayer-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: max-content;
+  margin-top: 15px;
+  color: var(--ink);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-decoration: none;
+}
+.multiplayer-link span {
+  padding: 3px 5px;
+  color: var(--blue);
+  background: #e9ebff;
+  border-radius: 3px;
+}
+.multiplayer-link:hover {
+  color: var(--blue);
+}
+.multiplayer-setup,
+.join-gate {
+  width: min(100%, 720px);
+  margin: auto;
+}
+.multiplayer-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 14px;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.multiplayer-setup h1,
+.join-gate h1,
+.room-lobby h1 {
+  max-width: 680px;
+  margin: 0;
+  font-size: clamp(50px, 7vw, 86px);
+  font-weight: 600;
+  letter-spacing: -0.09em;
+  line-height: 0.87;
+}
+.multiplayer-setup h1 em,
+.join-gate h1 em,
+.room-lobby h1 em {
+  color: var(--blue);
+  font-style: normal;
+}
+.multiplayer-intro,
+.join-gate > p {
+  max-width: 590px;
+  margin: 18px 0 26px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.room-form {
+  max-width: 660px;
+}
+.room-form label,
+.room-join label {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.room-form label > span,
+.room-join label > span {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.room-form input,
+.room-join input {
+  height: 48px;
+  padding: 0 13px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 15px;
+}
+.room-form input:focus,
+.room-join input:focus {
+  border-color: var(--blue);
+}
+.room-variants {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 17px 0;
+}
+.room-variants.is-motus {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.room-variants button {
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 12px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  text-align: left;
+}
+.room-variants button.is-active {
+  border-color: var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.room-variants b {
+  font-size: 16px;
+  letter-spacing: -0.04em;
+}
+.room-variants span {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.room-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 15px;
+  color: var(--white);
+  background: var(--ink);
+  border: 0;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.room-primary:hover:not(:disabled) {
+  background: var(--blue);
+}
+.room-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.room-divider {
+  position: relative;
+  max-width: 660px;
+  height: 1px;
+  margin: 30px 0;
+  background: var(--line);
+}
+.room-divider span {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  padding: 0 8px;
+  color: var(--muted);
+  background: var(--paper);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  transform: translateY(-50%);
+}
+.room-join {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  max-width: 510px;
+}
+.room-join label {
+  flex: 1;
+}
+.room-join button,
+.room-copy,
+.room-secondary,
+.room-end {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 48px;
+  padding: 0 13px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.room-join button:hover,
+.room-copy:hover,
+.room-secondary:hover {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.room-message {
+  min-height: 18px;
+  margin: 13px 0 0;
+  color: #bc5949;
+  font-size: 12px;
+}
+.room-stage {
+  background:
+    linear-gradient(rgba(21, 23, 29, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 23, 29, 0.025) 1px, transparent 1px),
+    var(--paper);
+  background-size: 28px 28px;
+}
+.room-shell {
+  width: min(100%, 1080px);
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 70px);
+  margin: auto;
+}
+.room-side {
+  align-self: center;
+  padding: 18px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.room-code-label {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.room-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 7px 0 2px;
+  padding: 0;
+  color: var(--blue);
+  background: transparent;
+  border: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+.room-side > p {
+  margin: 4px 0 17px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.room-players {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.room-players > div {
+  display: grid;
+  grid-template-columns: 17px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 5px;
+  min-height: 33px;
+  padding: 5px 6px;
+  border-radius: 5px;
+}
+.room-players > div.is-me {
+  background: #efffe0;
+}
+.room-players span {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.room-players b {
+  overflow: hidden;
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.room-players svg {
+  color: #95ba3c;
+}
+.room-players em {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  font-style: normal;
+}
+.room-copy {
+  width: 100%;
+  min-height: 37px;
+  margin-top: 15px;
+  font-size: 10px;
+}
+.room-main {
+  min-width: 0;
+  align-self: center;
+}
+.room-lobby {
+  max-width: 650px;
+}
+.room-lobby > p {
+  max-width: 550px;
+  margin: 18px 0 25px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.room-lobby > p b {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+}
+.room-wait {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 14px;
+  color: var(--muted);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 12px;
+}
+.room-wait svg {
+  color: var(--blue);
+}
+.room-round-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: clamp(28px, 5vh, 52px);
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.room-quiz h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(50px, 7vw, 84px);
+  font-weight: 600;
+  letter-spacing: -0.09em;
+  line-height: 0.87;
+}
+.room-quiz h1 em {
+  color: var(--blue);
+  font-style: normal;
+}
+.room-quiz h1 i {
+  font-style: normal;
+}
+.room-cnrtl {
+  margin-top: 17px;
+}
+.room-motus .motus-title h1 {
+  font-size: clamp(50px, 7vw, 84px);
+}
+.round-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 27px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+.round-footer > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+.round-footer > div {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.room-secondary {
+  min-height: 37px;
+  color: var(--white);
+  background: var(--ink);
+  border-color: var(--ink);
+  font-size: 11px;
+}
+.room-end {
+  min-height: 37px;
+  color: #a33d31;
+  font-size: 11px;
+}
+.room-end:hover {
+  border-color: #d47c70;
+  background: #fff0ee;
+}
+.round-footer button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+@media (max-width: 760px) {
+  .multiplayer-setup,
+  .join-gate {
+    margin-top: 78px;
+  }
+  .multiplayer-setup h1,
+  .join-gate h1,
+  .room-lobby h1 {
+    font-size: clamp(44px, 13vw, 63px);
+  }
+  .room-variants.is-motus {
+    grid-template-columns: 1fr;
+  }
+  .room-variants button {
+    min-height: 65px;
+    flex-direction: row;
+    align-items: center;
+  }
+  .room-join {
+    align-items: stretch;
+    flex-direction: column;
+  }
+  .room-join button {
+    min-height: 45px;
+  }
+  .room-shell {
+    display: flex;
+    flex-direction: column-reverse;
+    margin-top: 75px;
+    gap: 22px;
+  }
+  .room-side {
+    width: 100%;
+  }
+  .room-players {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .room-round-meta {
+    gap: 8px;
+    flex-direction: column;
+  }
+  .room-quiz h1,
+  .room-motus .motus-title h1 {
+    font-size: clamp(44px, 13vw, 63px);
+  }
+  .round-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .round-footer > div {
+    width: 100%;
+  }
+  .round-footer button {
+    flex: 1;
+  }
+  .room-motus .motus-grid {
+    margin-top: 29px;
+  }
+}
+
+/* Raffinement d’interface : conserver le langage motif., rendre les repères plus tactiles. */
+:root {
+  --surface: #ffffff;
+  --soft-blue: #eef0ff;
+  --soft-lime: #effbcf;
+  --shadow: 0 14px 32px rgba(21, 23, 29, 0.08);
+}
+body {
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(200, 241, 92, 0.16),
+      transparent 23rem
+    ),
+    var(--paper);
+}
+button,
+input,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+button,
+input {
+  transition:
+    box-shadow 160ms var(--easy),
+    border-color 160ms var(--easy),
+    background 160ms var(--easy),
+    transform 160ms var(--easy);
+}
+button:active:not(:disabled),
+.mode-choice:active,
+.setup-start:active,
+.room-primary:active {
+  transform: scale(0.98);
+}
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+  outline: 3px solid rgba(51, 70, 255, 0.48);
+  outline-offset: 3px;
+}
+.game-launcher {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: clamp(30px, 5vw, 64px);
+  background-size: 28px 28px;
+}
+.game-launcher::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: min(38vw, 480px);
+  height: min(38vw, 480px);
+  right: 0;
+  top: 8vh;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(51, 70, 255, 0.11),
+    rgba(51, 70, 255, 0) 68%
+  );
+  pointer-events: none;
+}
+.launcher-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.launcher-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  padding: 7px 9px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(223, 225, 229, 0.9);
+  border-radius: 999px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+}
+.launcher-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--lime);
+  box-shadow: 0 0 0 3px rgba(200, 241, 92, 0.28);
+}
+.launcher-copy {
+  position: relative;
+  margin: auto auto 27px;
+}
+.launcher-kicker {
+  display: inline-flex;
+  width: fit-content;
+  margin: 0 0 17px;
+  padding: 7px 9px;
+  color: var(--blue);
+  background: var(--soft-blue);
+  border-radius: 5px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.launcher-copy .launcher-intro {
+  max-width: 480px;
+  margin: 20px 0 0;
+  color: #58606e;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.mode-choices {
+  gap: 16px;
+}
+.mode-choice {
+  min-height: 266px;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 1px 0 rgba(21, 23, 29, 0.03);
+}
+.mode-choice::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  right: -30px;
+  top: -30px;
+  border-radius: 50%;
+  background: rgba(51, 70, 255, 0.06);
+  transition:
+    transform 220ms var(--easy),
+    background 220ms var(--easy);
+}
+.mode-choice:hover {
+  border-color: rgba(21, 23, 29, 0.72);
+  box-shadow: var(--shadow);
+  transform: translateY(-5px);
+}
+.mode-choice:hover::after {
+  background: rgba(51, 70, 255, 0.12);
+  transform: scale(1.35);
+}
+.mode-choice .mode-copy {
+  margin-top: auto;
+  padding-top: 18px;
+}
+.mode-choice h2 {
+  position: relative;
+  z-index: 1;
+  margin: 0 0 9px;
+}
+.mode-choice p {
+  position: relative;
+  z-index: 1;
+}
+.mode-choice .mode-tag {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  width: fit-content;
+  margin-top: 15px;
+  padding: 5px 7px;
+  color: var(--muted);
+  background: #f3f4f6;
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.mode-choice .choice-arrow {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  right: 19px;
+  bottom: 18px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+}
+.motus-choice-card {
+  box-shadow: 0 14px 25px rgba(21, 23, 29, 0.16);
+}
+.motus-choice-card .mode-tag {
+  color: #d6dbdf;
+  background: rgba(255, 255, 255, 0.11);
+}
+.motus-choice-card .choice-arrow {
+  color: var(--lime) !important;
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.17);
+}
+.launcher-foot {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: 20px;
+}
+.launcher-foot span {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  color: var(--blue);
+  background: var(--soft-blue);
+  border-radius: 50%;
+}
+.back-control {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 3px 12px rgba(21, 23, 29, 0.04);
+}
+.back-control:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  transform: translateY(-1px);
+}
+.mode-setup,
+.multiplayer-setup,
+.join-gate {
+  position: relative;
+}
+.mode-setup > p:not(.mini-label) {
+  max-width: 540px;
+}
+.setup-guidance {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 620px;
+  margin: 0 0 18px;
+  padding: 10px 12px;
+  color: #596171;
+  background: linear-gradient(
+    90deg,
+    var(--soft-blue),
+    rgba(255, 255, 255, 0.78)
+  );
+  border: 1px solid #dfe3ff;
+  border-radius: 8px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.setup-guidance span {
+  flex: 0 0 auto;
+  padding-top: 1px;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.setup-guidance b {
+  font-weight: 500;
+}
+.setup-options {
+  gap: 12px;
+  margin-bottom: 21px;
+}
+.setup-options button {
+  position: relative;
+  min-height: 125px;
+  padding: 18px;
+  border-radius: 11px;
+}
+.setup-options button:not(.is-active):hover {
+  background: #fbfbff;
+  border-color: #9aa6ff;
+  box-shadow: 0 7px 18px rgba(51, 70, 255, 0.08);
+}
+.setup-options button.is-active {
+  color: var(--ink);
+  border-color: var(--ink);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.setup-options button.is-active::after {
+  content: "CHOISI";
+  position: absolute;
+  right: 11px;
+  top: 10px;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+.setup-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.setup-start {
+  min-height: 48px;
+  padding: 0 17px;
+  border-radius: 9px;
+  box-shadow: 0 6px 0 rgba(21, 23, 29, 0.12);
+}
+.setup-start:hover {
+  background: var(--blue);
+  box-shadow: 0 7px 18px rgba(51, 70, 255, 0.25);
+  transform: translateY(-2px);
+}
+.multiplayer-link {
+  margin-top: 0;
+  padding: 8px 0;
+}
+.multiplayer-setup,
+.join-gate {
+  padding: clamp(18px, 3vw, 30px);
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(223, 225, 229, 0.8);
+  border-radius: 16px;
+  box-shadow: 0 16px 36px rgba(21, 23, 29, 0.035);
+}
+.room-form input,
+.room-join input {
+  background: rgba(255, 255, 255, 0.9);
+}
+.room-variants button {
+  border-radius: 9px;
+  transition:
+    transform 150ms var(--easy),
+    box-shadow 150ms var(--easy),
+    border-color 150ms var(--easy);
+}
+.room-variants button:not(.is-active):hover {
+  border-color: #9aa6ff;
+  transform: translateY(-2px);
+}
+.room-variants button.is-active {
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.room-primary {
+  min-height: 50px;
+  border-radius: 9px;
+  box-shadow: 0 6px 0 rgba(21, 23, 29, 0.12);
+}
+.room-primary:hover:not(:disabled) {
+  box-shadow: 0 8px 18px rgba(51, 70, 255, 0.26);
+  transform: translateY(-2px);
+}
+@media (max-width: 650px) {
+  .game-launcher {
+    padding: 20px 20px 28px;
+  }
+  .launcher-head {
+    align-items: flex-start;
+  }
+  .launcher-status {
+    padding: 6px 8px;
+    font-size: 8px;
+  }
+  .launcher-copy {
+    margin: 23px 0 22px;
+  }
+  .launcher-copy .launcher-intro {
+    margin-top: 13px;
+    font-size: 13px;
+  }
+  .mode-choices {
+    gap: 12px;
+  }
+  .mode-choice {
+    min-height: 181px;
+    padding: 20px;
+    border-radius: 13px;
+  }
+  .mode-choice .mode-copy {
+    margin-top: auto;
+    padding-top: 12px;
+  }
+  .mode-choice .mode-tag {
+    margin-top: 10px;
+  }
+  .mode-choice .choice-arrow {
+    right: 16px;
+    bottom: 16px;
+  }
+  .launcher-foot {
+    margin-top: 16px;
+    font-size: 9px;
+    line-height: 1.4;
+  }
+  .setup-guidance {
+    margin-bottom: 15px;
+    padding: 9px 10px;
+  }
+  .setup-options {
+    gap: 10px;
+  }
+  .setup-options button {
+    min-height: 82px;
+    padding: 14px;
+  }
+  .setup-options button.is-active::after {
+    right: 10px;
+    top: 9px;
+  }
+  .setup-actions {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .setup-start {
+    width: 100%;
+    justify-content: center;
+  }
+  .multiplayer-link {
+    justify-content: center;
+    width: 100%;
+  }
+  .multiplayer-setup,
+  .join-gate {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+.dark {
+  --ink: #f3f5fb;
+  --paper: #101218;
+  --white: #1a1e28;
+  --line: #343a49;
+  --muted: #a9b0bf;
+  --blue: #8f9bff;
+  --lime: #c8f15c;
+  --surface: #1a1e28;
+  --soft-blue: #20284c;
+  --soft-lime: #28351a;
+  --shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+.dark body {
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(143, 155, 255, 0.16),
+      transparent 23rem
+    ),
+    var(--paper);
+}
+.dark .game-launcher,
+.dark .room-stage {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+}
+.dark .launcher-status,
+.dark .back-control,
+.dark .mode-choice,
+.dark .setup-options button,
+.dark .room-variants button,
+.dark .room-form input,
+.dark .room-join input,
+.dark .room-side,
+.dark .room-wait,
+.dark .answer-choice,
+.dark .motus-cell,
+.dark .motus-entry input,
+.dark .key,
+.dark .multiplayer-key,
+.dark .room-copy,
+.dark .room-secondary,
+.dark .room-end {
+  background-color: var(--white);
+  border-color: var(--line);
+  color: var(--ink);
+}
+.dark .motus-choice-card,
+.dark .room-secondary {
+  background: #090b11;
+  color: var(--white);
+}
+.dark .multiplayer-setup,
+.dark .join-gate {
+  background: rgba(26, 30, 40, 0.6);
+  border-color: var(--line);
+}
+.dark .setup-guidance,
+.dark .room-customization,
+.dark .player-activity {
+  color: var(--muted);
+  background: rgba(26, 30, 40, 0.78);
+  border-color: var(--line);
+}
+.dark .room-customization legend {
+  color: var(--ink);
+  background: #28351a;
+  border-color: #46582c;
+}
+.dark .room-divider span {
+  background: var(--paper);
+}
+.dark .mode-choice .mode-tag,
+.dark .motus-help kbd {
+  color: var(--muted);
+  background: #2a3040;
+}
+.dark .answer-choice:not(:disabled):hover,
+.dark .joker-button:not(:disabled):hover {
+  background: #242c51;
+}
+.dark .room-players > div.is-me {
+  background: #29371b;
+}
+.dark .room-revealed-answer {
+  color: #e4e8f6;
+  background: #28351a;
+  border-color: #526a35;
+}
+.dark .theme-toggle {
+  background: rgba(26, 30, 40, 0.84);
+}
+@media (min-width: 900px) {
+  .mode-setup {
+    width: min(100%, 1060px);
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(440px, 1.18fr);
+    column-gap: clamp(42px, 7vw, 98px);
+    align-items: start;
+  }
+  .mode-setup > .mini-label,
+  .mode-setup > h1,
+  .mode-setup > p:not(.mini-label),
+  .mode-setup > .setup-guidance,
+  .mode-setup > .setup-actions {
+    grid-column: 1;
+  }
+  .mode-setup > .setup-options {
+    grid-column: 2;
+    grid-row: 1 / span 5;
+    align-self: center;
+    margin: 0;
+  }
+  .mode-setup > .setup-actions {
+    align-self: end;
+  }
+  .mode-setup h1 {
+    max-width: 500px;
+    font-size: clamp(60px, 6.2vw, 88px);
+  }
+  .mode-setup > .setup-guidance {
+    margin-top: 4px;
+  }
+  .mode-setup > .setup-options button {
+    min-height: 142px;
+  }
+  .mode-setup > .motus-setup-options button {
+    min-height: 142px;
+  }
+}
+@media (min-width: 981px) {
+  .mode-setup > .quiz-variant-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 761px) and (max-width: 980px) {
+  .quiz-variant-options,
+  .motus-setup-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 650px) {
+  .theme-toggle {
+    top: 18px;
+    right: 96px;
+    min-height: 30px;
+  }
+  .theme-toggle span {
+    display: none;
+  }
+}
+
+/* Affiches de règlement : règles lisibles avant le lancement, avec les effets de joker réellement disponibles. */
+.game-rules-poster {
+  width: 100%;
+  margin: 24px 0 6px;
+  overflow: hidden;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--white) 88%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  box-shadow: 0 10px 24px rgba(21, 23, 29, 0.055);
+}
+.game-rules-poster summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 51px;
+  padding: 12px 15px;
+  cursor: pointer;
+  list-style: none;
+}
+.game-rules-poster summary::-webkit-details-marker {
+  display: none;
+}
+.game-rules-summary-title,
+.game-rules-summary-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.game-rules-summary-title {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+.game-rules-summary-title svg {
+  color: var(--blue);
+}
+.game-rules-summary-hint {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.game-rules-summary-hint svg {
+  transition: transform 180ms var(--easy);
+}
+.game-rules-poster[open] .game-rules-summary-hint svg {
+  transform: rotate(180deg);
+}
+.game-rules-content {
+  padding: 0 15px 16px;
+  border-top: 1px dashed color-mix(in srgb, var(--line) 82%, transparent);
+}
+.game-rules-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  column-gap: 16px;
+  padding: 16px 0 14px;
+}
+.game-rules-heading .mini-label {
+  grid-column: 1 / -1;
+  margin-bottom: 7px;
+}
+.game-rules-heading h2 {
+  margin: 0;
+  font-size: clamp(25px, 3.2vw, 35px);
+  letter-spacing: -0.07em;
+  line-height: 0.9;
+}
+.game-rules-heading > p:not(.mini-label) {
+  max-width: 420px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+.game-rules-variant {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  margin-top: 13px;
+  padding: 8px 10px;
+  color: #3d4660;
+  background: var(--soft-blue);
+  border-left: 3px solid var(--blue);
+  border-radius: 4px;
+}
+.game-rules-variant span {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+}
+.game-rules-variant b {
+  font-size: 11px;
+}
+.game-rules-variant small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.game-rules-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.game-rules-section {
+  min-width: 0;
+  padding: 13px;
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  border-radius: 8px;
+}
+.game-rules-salon {
+  background: color-mix(in srgb, var(--soft-lime) 36%, var(--white));
+  border-color: color-mix(in srgb, var(--lime) 46%, var(--line));
+}
+.game-rules-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.game-rules-section-heading svg {
+  color: var(--blue);
+}
+.game-rules-section-heading p {
+  margin: 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.game-rules-intro {
+  margin: 10px 0 9px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.48;
+}
+.game-rules-steps {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 10px;
+  line-height: 1.42;
+}
+.game-rules-steps li {
+  padding-left: 2px;
+}
+.game-rules-steps li::marker {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+}
+.game-rules-joker-note,
+.game-rules-deck {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 11px;
+  padding: 8px;
+  color: #596171;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px dashed color-mix(in srgb, var(--line) 90%, var(--blue));
+  border-radius: 5px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.game-rules-joker-note svg,
+.game-rules-deck svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--blue);
+}
+.game-rules-jokers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  margin: 11px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.game-rules-jokers li {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid color-mix(in srgb, var(--line) 85%, transparent);
+  border-radius: 5px;
+}
+.game-rules-jokers b {
+  color: var(--ink);
+  font-size: 10px;
+}
+.game-rules-jokers span {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.36;
+}
+.dark .game-rules-poster {
+  background: rgba(26, 30, 40, 0.82);
+  border-color: var(--line);
+  box-shadow: 0 13px 28px rgba(0, 0, 0, 0.22);
+}
+.dark .game-rules-content {
+  border-color: var(--line);
+}
+.dark .game-rules-variant {
+  color: #dce2ff;
+  background: #232c50;
+}
+.dark .game-rules-section {
+  background: rgba(30, 35, 48, 0.76);
+  border-color: #42495b;
+}
+.dark .game-rules-salon {
+  background: rgba(39, 52, 28, 0.62);
+  border-color: #536a35;
+}
+.dark .game-rules-joker-note,
+.dark .game-rules-deck,
+.dark .game-rules-jokers li {
+  color: #c4cada;
+  background: rgba(20, 24, 33, 0.76);
+  border-color: #4c5465;
+}
+.dark .game-rules-jokers b {
+  color: var(--ink);
+}
+@media (min-width: 900px) {
+  .mode-setup > .setup-actions {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 0;
+  }
+}
+@media (max-width: 650px) {
+  .game-rules-poster {
+    margin-top: 20px;
+    border-radius: 9px;
+  }
+  .game-rules-poster summary {
+    min-height: 48px;
+    padding: 11px 12px;
+  }
+  .game-rules-summary-hint {
+    font-size: 8px;
+  }
+  .game-rules-heading {
+    display: block;
+    padding: 14px 0 12px;
+  }
+  .game-rules-heading > p:not(.mini-label) {
+    margin-top: 7px;
+  }
+  .game-rules-variant {
+    margin-top: 11px;
+  }
+  .game-rules-columns {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+  .game-rules-section {
+    padding: 11px;
+  }
+  .game-rules-jokers {
+    grid-template-columns: 1fr;
+  }
+  .game-rules-content {
+    padding: 0 12px 13px;
+  }
+}
+
+/* Fiche d’accueil ponctuelle : une explication brève, visuelle et sans panneau permanent. */
+.game-intro-overlay {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 4vw, 36px);
+  overflow: auto;
+  background: rgba(17, 22, 28, 0.5);
+  backdrop-filter: blur(5px);
+  animation: game-intro-fade 180ms var(--easy);
+}
+.game-intro-sheet {
+  position: relative;
+  width: min(100%, 850px);
+  max-height: min(850px, calc(100dvh - 28px));
+  overflow: auto;
+  padding: clamp(22px, 4vw, 34px);
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(21, 23, 29, 0.038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 23, 29, 0.038) 1px, transparent 1px),
+    var(--paper);
+  background-size: 24px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 16px;
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.28);
+  animation: game-intro-rise 240ms var(--easy);
+}
+.game-intro-sheet::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(38px, 8vw, 72px);
+  width: 2px;
+  background: rgba(221, 96, 96, 0.42);
+  pointer-events: none;
+}
+.game-intro-sheet > * {
+  position: relative;
+}
+.game-intro-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+.game-intro-close:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  transform: rotate(5deg);
+}
+.game-intro-header {
+  padding-right: 50px;
+}
+.game-intro-header .mini-label {
+  margin-bottom: 7px;
+}
+.game-intro-header h1 {
+  margin: 0;
+  font-size: clamp(42px, 6vw, 68px);
+  letter-spacing: -0.09em;
+  line-height: 0.84;
+}
+.game-intro-header > p:last-child {
+  margin: 11px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+.game-intro-visual {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 16px;
+  margin: 22px 0 15px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.game-intro-visual > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.game-intro-visual > div:last-child span {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.game-intro-visual > div:last-child b {
+  font-size: 15px;
+  line-height: 1.25;
+}
+.intro-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 62px;
+  padding: 10px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--soft-blue) 68%, var(--white));
+  border-radius: 7px;
+}
+.intro-quiz-diagram span,
+.intro-motus-diagram span {
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+}
+.intro-quiz-diagram i {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: #087443;
+  border-radius: 50%;
+}
+.intro-motus-diagram .is-exact {
+  color: #fff;
+  background: #087443;
+  border-color: #087443;
+}
+.intro-motus-diagram .is-present {
+  color: #372900;
+  background: #f7c948;
+  border-color: #f7c948;
+}
+.intro-motus-diagram .is-absent {
+  color: #fff;
+  background: #6d7785;
+  border-color: #6d7785;
+}
+.intro-definition-diagram span {
+  padding: 8px 9px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+.intro-definition-diagram i {
+  width: 28px;
+  height: 1px;
+  background: var(--green-ink, #245b49);
+  transform: rotate(-9deg);
+}
+.game-intro-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.game-intro-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-height: 98px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.game-intro-steps b {
+  color: var(--blue);
+  font-size: 12px;
+}
+.game-intro-steps span {
+  color: #596171;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.game-intro-format {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  margin: 12px 0;
+  padding: 8px 10px;
+  background: var(--soft-lime);
+  border-left: 3px solid #789c3d;
+  border-radius: 5px;
+}
+.game-intro-format span {
+  color: #587334;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.game-intro-format b {
+  font-size: 12px;
+}
+.game-intro-format small {
+  color: var(--muted);
+  font-size: 10px;
+}
+.game-intro-jokers {
+  padding: 13px;
+  background: #fffef6;
+  border: 1px solid #e5e1bf;
+  border-radius: 10px;
+}
+.game-intro-joker-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.game-intro-joker-heading svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: #789c3d;
+}
+.game-intro-joker-heading p {
+  margin: 0 0 3px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.game-intro-joker-heading span {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+.game-intro-joker-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  margin-top: 11px;
+}
+.game-intro-joker-list article {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid #e6e4d0;
+  border-radius: 6px;
+}
+.game-intro-joker-list b {
+  font-size: 10px;
+}
+.game-intro-joker-list span {
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.32;
+}
+.game-intro-solo {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-top: 11px;
+  padding: 8px 10px;
+  color: #596171;
+  background: rgba(255, 255, 255, 0.66);
+  border: 1px dashed var(--line);
+  border-radius: 6px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.game-intro-solo svg {
+  flex: 0 0 auto;
+  margin-top: 1px;
+  color: var(--blue);
+}
+.game-intro-start {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 49px;
+  margin-top: 14px;
+  color: #fff;
+  background: var(--ink);
+  border: 0;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.game-intro-start:hover {
+  background: var(--blue);
+  transform: translateY(-2px);
+}
+.dark .game-intro-sheet {
+  background-color: var(--paper);
+  border-color: #4b5365;
+}
+.dark .game-intro-visual,
+.dark .game-intro-steps li,
+.dark .game-intro-solo {
+  background: rgba(26, 30, 40, 0.86);
+  border-color: #464f62;
+}
+.dark .game-intro-visual > div:last-child b,
+.dark .game-intro-steps span,
+.dark .game-intro-solo {
+  color: #c7cedd;
+}
+.dark .intro-diagram {
+  background: #232b4a;
+}
+.dark .intro-quiz-diagram span,
+.dark .intro-motus-diagram span,
+.dark .intro-definition-diagram span {
+  color: var(--ink);
+  background: #1a1e28;
+  border-color: #505a70;
+}
+.dark .game-intro-close {
+  color: var(--ink);
+  background: #1a1e28;
+  border-color: #4f596e;
+}
+.dark .game-intro-jokers {
+  background: #26301d;
+  border-color: #586c3b;
+}
+.dark .game-intro-joker-list article {
+  background: #1b2118;
+  border-color: #4b5c34;
+}
+.dark .game-intro-joker-list span,
+.dark .game-intro-joker-heading span {
+  color: #c6cfb8;
+}
+.dark .game-intro-format {
+  color: var(--ink);
+  background: #29371b;
+}
+.dark .game-intro-format span {
+  color: #c8f15c;
+}
+@keyframes game-intro-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes game-intro-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@media (max-width: 650px) {
+  .game-intro-overlay {
+    place-items: start center;
+    padding: 10px;
+  }
+  .game-intro-sheet {
+    max-height: none;
+    min-height: calc(100dvh - 20px);
+    padding: 24px 14px 16px;
+    border-radius: 12px;
+  }
+  .game-intro-sheet::before {
+    left: 27px;
+  }
+  .game-intro-header {
+    padding: 12px 40px 0 15px;
+  }
+  .game-intro-header h1 {
+    font-size: 42px;
+  }
+  .game-intro-header > p:last-child {
+    font-size: 12px;
+  }
+  .game-intro-visual {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin: 17px 15px 12px;
+    padding: 10px;
+  }
+  .intro-diagram {
+    min-height: 48px;
+  }
+  .game-intro-visual > div:last-child b {
+    font-size: 13px;
+  }
+  .game-intro-steps {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    margin: 0 15px;
+  }
+  .game-intro-steps li {
+    min-height: 0;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 7px;
+    padding: 9px 10px;
+  }
+  .game-intro-steps b {
+    flex: 0 0 auto;
+    font-size: 10px;
+  }
+  .game-intro-steps span {
+    font-size: 10px;
+  }
+  .game-intro-format {
+    margin: 11px 15px;
+  }
+  .game-intro-jokers {
+    margin: 0 15px;
+    padding: 10px;
+  }
+  .game-intro-joker-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .game-intro-joker-list article {
+    padding: 7px;
+  }
+  .game-intro-solo {
+    margin: 10px 15px 0;
+  }
+  .game-intro-start {
+    width: calc(100% - 30px);
+    margin: 12px 15px 0;
+  }
+  .game-intro-close {
+    top: 12px;
+    right: 12px;
+    width: 35px;
+    height: 35px;
+  }
+}
+
+/* Salon : une feuille quadrillée avec une marge de notes, sans sacrifier la densité de jeu. */
+.room-stage {
+  overflow: hidden;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(21, 23, 29, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 23, 29, 0.035) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+.room-shell {
+  width: min(100%, 1200px);
+  grid-template-columns: 276px minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 72px);
+  position: relative;
+  padding: clamp(12px, 2vw, 26px);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--paper) 78%, transparent);
+}
+.room-shell::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 18px;
+  bottom: 18px;
+  left: calc(276px + clamp(16px, 2.5vw, 36px));
+  width: 2px;
+  background: rgba(226, 111, 111, 0.34);
+  pointer-events: none;
+}
+.room-side,
+.room-main {
+  position: relative;
+  z-index: 1;
+}
+.room-side {
+  align-self: start;
+  min-height: 425px;
+  padding: 22px 20px 20px;
+  border-radius: 4px 12px 12px 4px;
+  box-shadow: 8px 10px 22px rgba(21, 23, 29, 0.07);
+}
+.room-side::before {
+  content: "notes du salon";
+  display: block;
+  margin: -5px 0 10px;
+  color: var(--blue);
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+.room-title-block h2 {
+  font-family: "Caveat", cursive;
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+}
+.room-code {
+  margin-top: 4px;
+  font-size: 25px;
+}
+.room-side > p {
+  margin-bottom: 21px;
+  font-size: 12px;
+}
+.room-players {
+  gap: 6px;
+}
+.room-players > div {
+  min-height: 37px;
+  padding: 6px 7px;
+}
+.room-players b {
+  font-size: 12px;
+}
+.room-meta-rail {
+  margin-top: 20px;
+  padding-top: 14px;
+  row-gap: 4px;
+}
+.room-meta-rail > span {
+  font-family: "Caveat", cursive;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+.room-meta-rail b {
+  font-size: 40px;
+  letter-spacing: -0.09em;
+}
+.room-meta-rail small,
+.room-meta-rail em {
+  font-size: 9px;
+}
+.room-main {
+  align-self: start;
+  padding: clamp(10px, 2vw, 24px) clamp(0px, 1.4vw, 18px);
+}
+.room-lobby,
+.room-quiz,
+.room-motus,
+.room-definition {
+  max-width: 820px;
+}
+.room-lobby h1,
+.room-quiz h1,
+.room-motus .motus-title h1 {
+  text-wrap: balance;
+}
+
+/* Motus sombre : cases profondes, contours visibles et jeton de marque lisible. */
+.dark .stage-logo span,
+.dark .launcher-brand span {
+  color: #101218;
+  background: #d4ff69;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 2px 0 rgba(255, 255, 255, 0.18);
+}
+.dark .motus-cell {
+  color: #f7f9ff;
+  background: #1d2431;
+  border-color: #58637a;
+  box-shadow:
+    inset 0 -3px 0 #111621,
+    0 1px 0 rgba(255, 255, 255, 0.07);
+}
+.dark .motus-cell.state-exact {
+  color: #ffffff;
+  background: #0b8752;
+  border-color: #20b678;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18);
+}
+.dark .motus-cell.state-present {
+  color: #302600;
+  background: #ffd05b;
+  border-color: #ffe090;
+  box-shadow: inset 0 -3px 0 rgba(111, 76, 0, 0.18);
+}
+.dark .motus-cell.state-absent {
+  color: #f5f7fb;
+  background: #586477;
+  border-color: #758196;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.16);
+}
+.dark .key,
+.dark .multiplayer-key {
+  color: #edf1fb;
+  background: #252d3b;
+  border: 1px solid #4f5a6d;
+}
+.dark .key-exact,
+.dark .multiplayer-key.key-exact {
+  color: #fff;
+  background: #0b8752;
+  border-color: #20b678;
+}
+.dark .key-present,
+.dark .multiplayer-key.key-present {
+  color: #302600;
+  background: #ffd05b;
+  border-color: #ffe090;
+}
+.dark .key-absent,
+.dark .multiplayer-key.key-absent {
+  color: #f5f7fb;
+  background: #586477;
+  border-color: #758196;
+}
+.dark .room-stage {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.052) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.052) 1px, transparent 1px);
+}
+.dark .room-shell {
+  background: rgba(16, 18, 24, 0.62);
+}
+.dark .room-shell::before {
+  background: rgba(245, 126, 126, 0.42);
+}
+.dark .room-side {
+  box-shadow: 8px 12px 28px rgba(0, 0, 0, 0.26);
+}
+
+@media (max-width: 760px) {
+  .room-shell {
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+  }
+  .room-shell::before {
+    display: none;
+  }
+  .room-side {
+    min-height: 0;
+    padding: 18px 16px;
+  }
+  .room-side::before {
+    margin-bottom: 7px;
+  }
+  .room-main {
+    padding: 0;
+  }
+  .room-meta-rail b {
+    font-size: 34px;
+  }
+}
+
+/* Cahier de jeu : quadrillage discret, marge intégrée et légères irrégularités d’encre. */
+.game-stage {
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(21, 23, 29, 0.043) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21, 23, 29, 0.043) 1px, transparent 1px),
+    radial-gradient(
+      ellipse at 17% 29%,
+      rgba(21, 23, 29, 0.025) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      ellipse at 73% 66%,
+      rgba(21, 23, 29, 0.018) 0 1px,
+      transparent 1.7px
+    );
+  background-size:
+    27px 27px,
+    27px 27px,
+    83px 71px,
+    109px 97px;
+}
+.game-stage::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background: linear-gradient(
+    90deg,
+    transparent calc(clamp(56px, 10vw, 136px) - 1px),
+    rgba(221, 96, 96, 0.48) clamp(56px, 10vw, 136px),
+    rgba(221, 96, 96, 0.48) calc(clamp(56px, 10vw, 136px) + 1px),
+    transparent calc(clamp(56px, 10vw, 136px) + 2px)
+  );
+}
+.game-stage::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: calc(clamp(56px, 10vw, 136px) - 7px);
+  top: 11%;
+  width: 13px;
+  height: 78%;
+  opacity: 0.32;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(206, 81, 81, 0.18),
+    transparent 66%
+  );
+  filter: blur(2px);
+}
+.game-stage > * {
+  position: relative;
+  z-index: 1;
+}
+.game-launcher::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  left: clamp(40px, 8vw, 110px);
+  width: 2px;
+  opacity: 0.42;
+  background: rgba(221, 96, 96, 0.45);
+  pointer-events: none;
+}
+.game-stage > .stage-logo {
+  position: absolute;
+  z-index: 5;
+}
+.game-stage > .back-control {
+  position: absolute;
+  z-index: 5;
+}
+.dark .game-stage {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    radial-gradient(
+      ellipse at 17% 29%,
+      rgba(255, 255, 255, 0.035) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      ellipse at 73% 66%,
+      rgba(255, 255, 255, 0.028) 0 1px,
+      transparent 1.7px
+    );
+}
+.dark .game-stage::before {
+  background: linear-gradient(
+    90deg,
+    transparent calc(clamp(56px, 10vw, 136px) - 1px),
+    rgba(255, 130, 130, 0.38) clamp(56px, 10vw, 136px),
+    rgba(255, 130, 130, 0.38) calc(clamp(56px, 10vw, 136px) + 1px),
+    transparent calc(clamp(56px, 10vw, 136px) + 2px)
+  );
+}
+.quiz-context {
+  max-width: 640px;
+  margin: 0 0 18px;
+  padding: 10px 12px;
+  color: #566174;
+  background: rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(173, 182, 207, 0.48);
+  border-radius: 4px 8px 8px 4px;
+  font-family: "Caveat", cursive;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.1;
+  transform: rotate(-0.25deg);
+}
+.dark .quiz-context {
+  color: #e1e7fa;
+  background: rgba(31, 38, 55, 0.78);
+  border-color: #53617c;
+}
+.room-quiz .quiz-context {
+  margin-bottom: 17px;
+}
+.room-quiz .answer-choice,
+.quiz-play .answer-choice {
+  min-height: 70px;
+  padding: 13px 16px;
+}
+.room-quiz .answer-choice b,
+.quiz-play .answer-choice b {
+  font-size: 15px;
+}
+.room-quiz .answer-choice span,
+.quiz-play .answer-choice span {
+  width: 30px;
+  height: 30px;
+}
+.motus-feedback-guide {
+  gap: 12px;
+  margin-top: 18px;
+  padding: 9px 12px;
+  color: #566174;
+  background: rgba(255, 255, 255, 0.56);
+  border: 1px solid rgba(173, 182, 207, 0.5);
+  border-radius: 7px;
+  font-size: 11px;
+}
+.motus-feedback-guide i {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(21, 23, 29, 0.2);
+}
+.dark .motus-feedback-guide {
+  color: #edf1fa;
+  background: #202838;
+  border-color: #56637a;
+}
+.dark .motus-feedback-guide i.state-exact {
+  border-color: #41cf95;
+}
+.dark .motus-feedback-guide i.state-present {
+  border-color: #ffe7a0;
+}
+.dark .motus-feedback-guide i.state-absent {
+  border-color: #9ea9ba;
+}
+.dark .answer-choice.is-correct {
+  color: #e9ffd2;
+  background: #263d1d;
+  border-color: #7aad45;
+}
+.dark .answer-choice.is-correct span {
+  color: #d9ffc3;
+  background: #365827;
+}
+.dark .answer-choice.is-wrong {
+  color: #ffd6cf;
+  background: #462724;
+  border-color: #a45c53;
+}
+.dark .answer-choice.is-wrong span {
+  color: #ffd6cf;
+  background: #623531;
+}
+@media (max-width: 650px) {
+  .game-stage::before,
+  .game-stage::after {
+    display: none;
+  }
+  .game-stage {
+    background-size:
+      23px 23px,
+      23px 23px,
+      69px 61px,
+      92px 81px;
+  }
+  .quiz-context {
+    font-size: 19px;
+  }
+  .room-quiz .answer-choice,
+  .quiz-play .answer-choice {
+    min-height: 64px;
+  }
+}
+.review-note {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.motus-play .motus-feedback-guide {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  margin: 13px auto 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.motus-play .motus-feedback-guide span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.motus-play .motus-feedback-guide i {
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+}
+.motus-play .motus-feedback-guide .state-exact {
+  background: #087443;
+}
+.motus-play .motus-feedback-guide .state-present {
+  background: #f7c948;
+}
+.motus-play .motus-feedback-guide .state-absent {
+  background: #6d7785;
+}
+.motus-entry {
+  position: relative;
+}
+.motus-character-count {
+  position: absolute;
+  right: calc(100% + 8px);
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.dark .motus-play .motus-feedback-guide {
+  color: #edf1fa;
+}
+.dark .motus-play .motus-feedback-guide .state-exact {
+  box-shadow: 0 0 0 1px #7be0ae;
+}
+.dark .motus-play .motus-feedback-guide .state-present {
+  box-shadow: 0 0 0 1px #ffe7a0;
+}
+.dark .motus-play .motus-feedback-guide .state-absent {
+  box-shadow: 0 0 0 1px #c3cbd8;
+}
+@media (max-width: 760px) {
+  .motus-character-count {
+    position: static;
+    order: 3;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* Carnet de jeu : papier crème, encre feutrée et titres plus éditoriaux. */
+:root {
+  --paper: #f3eedf;
+  --white: #fffdf6;
+  --line: #ded6c6;
+  --ink: #24312d;
+  --muted: #6d756e;
+  --blue: #315f51;
+  --lime: #d9e892;
+  --saffron: #e6a23a;
+  --soft-blue: #e6f0e7;
+  --soft-lime: #f1f6d6;
+}
+body {
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(230, 162, 58, 0.12),
+      transparent 24rem
+    ),
+    var(--paper);
+  font-family: "DM Sans", "Space Grotesk", sans-serif;
+}
+.launcher-copy h1,
+.quiz-main h1,
+.motus-title h1,
+.definition-play h1,
+.mode-setup h1,
+.multiplayer-setup h1,
+.join-gate h1,
+.room-lobby h1,
+.room-quiz h1 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  line-height: 0.91;
+}
+.quiz-main h1 em,
+.motus-title h1 em,
+.definition-play h1 em,
+.mode-setup h1 em,
+.multiplayer-setup h1 em,
+.join-gate h1 em,
+.room-lobby h1 em,
+.room-quiz h1 em {
+  color: var(--blue);
+}
+.game-stage::before {
+  background: linear-gradient(
+    90deg,
+    transparent calc(max(96px, 50% - 440px) - 1px),
+    rgba(194, 94, 82, 0.46) max(96px, 50% - 440px),
+    rgba(194, 94, 82, 0.46) calc(max(96px, 50% - 440px) + 1px),
+    transparent calc(max(96px, 50% - 440px) + 2px)
+  );
+}
+.game-stage::after {
+  left: calc(max(96px, 50% - 440px) - 7px);
+}
+.game-launcher::after {
+  left: max(82px, calc(50% - 440px));
+  background: rgba(194, 94, 82, 0.42);
+}
+.game-stage {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(47, 71, 60, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(47, 71, 60, 0.055) 1px, transparent 1px),
+    radial-gradient(
+      ellipse at 17% 29%,
+      rgba(97, 74, 42, 0.038) 0 1px,
+      transparent 1.8px
+    ),
+    radial-gradient(
+      ellipse at 73% 66%,
+      rgba(97, 74, 42, 0.028) 0 1px,
+      transparent 1.7px
+    );
+}
+.dark .game-stage::before {
+  background: linear-gradient(
+    90deg,
+    transparent calc(max(96px, 50% - 440px) - 1px),
+    rgba(255, 156, 143, 0.38) max(96px, 50% - 440px),
+    rgba(255, 156, 143, 0.38) calc(max(96px, 50% - 440px) + 1px),
+    transparent calc(max(96px, 50% - 440px) + 2px)
+  );
+}
+.motus-choice-card {
+  color: var(--ink);
+  background: linear-gradient(145deg, #f4f7d8, #e5f0d7);
+  border-color: #c6d5a0;
+  box-shadow: 0 12px 24px rgba(49, 95, 81, 0.12);
+}
+.motus-choice-card p,
+.motus-choice-card .mode-number {
+  color: #53645d;
+}
+.motus-choice-card svg,
+.motus-choice-card .choice-arrow {
+  color: var(--blue) !important;
+}
+.motus-choice-card .mode-tag {
+  color: #456451;
+  background: rgba(255, 255, 255, 0.64);
+}
+.motus-choice-card .choice-arrow {
+  background: #fffdf6;
+  border-color: #bad0bd;
+}
+.motus-choice-card:hover {
+  border-color: #799d84;
+  box-shadow: 8px 8px 0 #6c9278;
+}
+.dark .motus-result {
+  color: #edffd6;
+  background: #263d1d;
+  border-color: #7aad45;
+}
+.dark .motus-result b {
+  color: #ffffff;
+}
+.dark .motus-result.lost {
+  color: #ffd9d1;
+  background: #4b2c27;
+  border-color: #a96559;
+}
+.dark .motus-result.lost b {
+  color: #ffffff;
+}
+.dark .definition-play {
+  background: rgba(23, 29, 33, 0.87);
+  border-color: #4c5b56;
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+}
+.dark .definition-board {
+  background: #151d20;
+  border-color: #42504a;
+}
+.dark .definition-help {
+  color: #d9e5dc;
+  background: #1e2b29;
+}
+.dark .definition-result {
+  color: #e6f7ce;
+  background: #263d1d;
+  border-color: #6f9d47;
+}
+.dark .definition-result p {
+  color: #d1e8b0;
+}
+.dark .definition-links a {
+  background: #202a2d;
+  border-color: #4c5b56;
+  color: #edf5ee;
+}
+@media (max-width: 650px) {
+  .game-stage::before,
+  .game-stage::after {
+    display: none;
+  }
+  .game-launcher::after {
+    left: 48px;
+  }
+  .motus-choice-card {
+    background: linear-gradient(145deg, #f4f7d8, #e5f0d7);
+  }
+}
+
+/* Cette règle suit la palette claire pour que le mode sombre ne soit jamais écrasé par le papier crème. */
+.dark {
+  --ink: #f3f5fb;
+  --paper: #101218;
+  --white: #1a1e28;
+  --line: #343a49;
+  --muted: #a9b0bf;
+  --blue: #a8d59b;
+  --lime: #d4ef91;
+  --soft-blue: #202b28;
+  --soft-lime: #28351a;
+  --shadow: 0 18px 38px rgba(0, 0, 0, 0.35);
+}
+.dark body {
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(168, 213, 155, 0.14),
+      transparent 24rem
+    ),
+    var(--paper);
+}
+.dark .motus-choice-card {
+  color: #eff8eb;
+  background: linear-gradient(145deg, #253a32, #1b2924);
+  border-color: #557562;
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.28);
+}
+.dark .motus-choice-card p,
+.dark .motus-choice-card .mode-number {
+  color: #c5d5cc;
+}
+.dark .motus-choice-card svg,
+.dark .motus-choice-card .choice-arrow {
+  color: #d4ef91 !important;
+}
+.dark .motus-choice-card .mode-tag {
+  color: #d9eadb;
+  background: rgba(255, 255, 255, 0.09);
+}
+.dark .motus-choice-card .choice-arrow {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: #587060;
+}
+
+/* Le plateau impose position:relative à ses enfants ; la fiche doit rester au-dessus de tout le viewport. */
+.game-stage > .game-intro-overlay {
+  position: fixed;
+  z-index: 120;
+  inset: 0;
+}
+.game-intro-more-jokers {
+  width: 100%;
+  margin-top: 8px;
+  padding: 7px 9px;
+  color: var(--blue);
+  background: transparent;
+  border: 1px dashed color-mix(in srgb, var(--blue) 45%, var(--line));
+  border-radius: 5px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  font-weight: 600;
+}
+.game-intro-more-jokers:hover {
+  background: var(--soft-blue);
+  border-style: solid;
+}
+.dark .game-intro-more-jokers {
+  color: #d4ef91;
+  border-color: #60784a;
+}
+.dark .game-intro-more-jokers:hover {
+  background: #28351a;
+}

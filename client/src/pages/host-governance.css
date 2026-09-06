@@ -1,0 +1,75 @@
+.host-governance {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding: 12px 0 0;
+  border: 0;
+  border-top: 1px dashed var(--line);
+  background: transparent;
+  box-shadow: none;
+}
+.host-governance b {
+  display: block;
+  font-size: 0.84rem;
+}
+.host-governance span {
+  display: block;
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+.host-transfer-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.host-transfer-list button,
+.host-governance-actions button,
+.room-leave-button {
+  border: 1px solid var(--green-ink);
+  background: var(--paper-sheet);
+  padding: 7px 8px;
+  color: var(--ink);
+  font-size: 0.66rem;
+  font-weight: 800;
+}
+.host-transfer-list button:hover,
+.host-governance-actions button:hover,
+.room-leave-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 2px 2px 0 rgba(24, 75, 58, 0.18);
+}
+.host-governance-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+}
+.host-close-session {
+  border-color: var(--red) !important;
+  color: var(--red) !important;
+}
+.room-leave-button {
+  width: 100%;
+  margin: 18px 0 0;
+  text-align: left;
+}
+.dark .host-transfer-list button,
+.dark .host-governance-actions button,
+.dark .room-leave-button {
+  background: var(--paper-note);
+}
+@media (max-width: 760px) {
+  .host-governance {
+    margin-top: 15px;
+  }
+  .host-governance-actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .host-governance-actions button {
+    min-height: 38px;
+  }
+  .room-leave-button {
+    min-height: 40px;
+  }
+}

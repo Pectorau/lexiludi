@@ -1,0 +1,294 @@
+.daily-stage {
+  min-height: 100vh;
+  padding: 92px 18px 48px;
+}
+.daily-sheet {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  padding: clamp(22px, 5vw, 48px);
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border: 4px solid var(--ink);
+  box-shadow: 10px 11px 0 var(--ink);
+}
+.daily-kicker {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.daily-sheet h1 {
+  margin: 18px 0 0;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(52px, 9vw, 94px);
+  line-height: 0.88;
+}
+.daily-subtitle {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.daily-goal,
+.daily-rules,
+.daily-jokers {
+  margin-top: 22px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  background: var(--paper-note);
+}
+.daily-goal {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border-left: 4px solid var(--blue);
+}
+.daily-goal svg {
+  color: var(--blue);
+}
+.daily-goal p,
+.daily-rules p,
+.daily-jokers p {
+  margin: 0 0 7px;
+}
+.daily-goal b {
+  font-size: 16px;
+  line-height: 1.35;
+}
+.daily-rules ol {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding-left: 22px;
+}
+.daily-rules li,
+.daily-jokers span {
+  font-size: 14px;
+  line-height: 1.45;
+}
+.daily-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  text-align: center;
+}
+.daily-play {
+  margin-top: 22px;
+  padding: 15px;
+  border: 2px solid var(--ink);
+  background: var(--paper-sheet);
+}
+.daily-definition {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: 24px;
+  line-height: 1.22;
+}
+.daily-play small {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.daily-play form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-top: 16px;
+}
+.daily-play form label {
+  grid-column: 1/-1;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.daily-play input {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid var(--ink);
+  background: var(--paper-note);
+  font:
+    600 16px "IBM Plex Mono",
+    monospace;
+}
+.daily-play form button,
+.daily-hint {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 12px;
+  color: var(--paper-sheet);
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  font:
+    700 11px "IBM Plex Mono",
+    monospace;
+}
+.daily-hint {
+  margin-top: 12px;
+  background: var(--paper-note);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.daily-hint:disabled {
+  opacity: 0.45;
+}
+.daily-pyramid {
+  display: grid;
+  gap: 5px;
+  margin: 12px 0;
+}
+.daily-pyramid span {
+  padding: 7px 10px;
+  border: 1px dashed var(--line);
+  font:
+    700 15px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.12em;
+}
+.daily-pyramid .is-current {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: var(--paper-note);
+}
+.daily-pyramid .is-done {
+  color: var(--paper-sheet);
+  background: var(--ink);
+}
+.auction-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0;
+}
+.auction-letters span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 36px;
+  border: 1px solid var(--ink);
+  font:
+    700 17px "IBM Plex Mono",
+    monospace;
+}
+.daily-result {
+  margin: 12px 0 0;
+  padding: 9px;
+  border-left: 4px solid var(--blue);
+  background: var(--paper-note);
+  font-weight: 700;
+}
+.daily-loading {
+  margin-top: 22px;
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+}
+.daily-exit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  margin-top: 15px;
+  padding: 11px;
+  color: var(--ink);
+  border: 1px dashed var(--line);
+  font:
+    700 10px "IBM Plex Mono",
+    monospace;
+}
+.daily-exit:hover {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: var(--paper-note);
+}
+.daily-completion {
+  display: grid;
+  gap: 14px;
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  background: var(--paper-note);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+  text-align: left;
+}
+.daily-completion h2 {
+  margin: 0;
+  color: var(--blue);
+  font:
+    700 clamp(2rem, 8vw, 3.6rem) "IBM Plex Mono",
+    monospace;
+  letter-spacing: -0.08em;
+}
+.daily-completion p:not(.mini-label) {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.daily-completion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.daily-practice-restart,
+.daily-share-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid var(--blue);
+  font:
+    700 0.72rem "IBM Plex Mono",
+    monospace;
+  text-decoration: none;
+  cursor: pointer;
+}
+.daily-practice-restart {
+  color: var(--paper-sheet);
+  background: var(--blue);
+}
+.daily-share-trigger {
+  color: var(--blue);
+  background: transparent;
+}
+@media (max-width: 650px) {
+  .daily-stage {
+    padding: 76px 12px 28px;
+  }
+  .daily-sheet {
+    padding: 22px 17px;
+    box-shadow: 6px 7px 0 var(--ink);
+  }
+  .daily-goal b {
+    font-size: 14px;
+  }
+  .daily-rules li,
+  .daily-jokers span {
+    font-size: 13px;
+  }
+  .daily-definition {
+    font-size: 21px;
+  }
+  .daily-play form {
+    grid-template-columns: 1fr;
+  }
+  .daily-play form button {
+    min-height: 42px;
+  }
+  .daily-completion {
+    padding: 16px;
+  }
+  .daily-completion-actions > * {
+    flex: 1;
+  }
+}

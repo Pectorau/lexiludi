@@ -1,0 +1,569 @@
+/* Couche finale : les trois entrées de jeu reprennent la grammaire de la feuille Seyès. */
+:root {
+  --seyes-master: rgba(121, 113, 194, 0.62);
+  --seyes-subline: rgba(121, 113, 194, 0.2);
+  --seyes-paper: #faf7ee;
+  --seyes-card: rgba(255, 255, 255, 0.92);
+  --seyes-ink: #181d28;
+  --seyes-violet: #5e55b7;
+  --seyes-margin: #d93d31;
+}
+
+.quiz-stage,
+.motus-stage,
+.definition-stage {
+  position: relative;
+  color: var(--seyes-ink);
+  background-color: var(--seyes-paper) !important;
+  background-image:
+    repeating-linear-gradient(
+      var(--seyes-subline) 0,
+      var(--seyes-subline) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      var(--seyes-master) 0,
+      var(--seyes-master) 1.5px,
+      transparent 1.5px,
+      transparent 32px
+    ) !important;
+  background-size: 100% 32px !important;
+}
+.quiz-stage::before,
+.motus-stage::before,
+.definition-stage::before {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: clamp(56px, 9vw, 132px);
+  width: 2px;
+  background: var(--seyes-margin);
+  content: "";
+  opacity: 0.72;
+  pointer-events: none;
+}
+.quiz-stage .mode-setup,
+.motus-stage .mode-setup,
+.definition-stage .mode-setup {
+  position: relative;
+  z-index: 1;
+}
+.quiz-stage .mode-setup h1,
+.motus-stage .mode-setup h1,
+.definition-stage .mode-setup h1 {
+  color: var(--seyes-ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.94;
+}
+.quiz-stage .mode-setup h1 em,
+.motus-stage .mode-setup h1 em,
+.definition-stage .mode-setup h1 em {
+  color: var(--seyes-violet);
+  font-style: italic;
+  text-decoration: underline wavy var(--seyes-margin);
+  text-underline-offset: 7px;
+}
+.quiz-stage .mode-setup .mini-label,
+.motus-stage .mode-setup .mini-label,
+.definition-stage .mode-setup .mini-label {
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 13px;
+  padding: 4px 7px;
+  color: var(--seyes-violet);
+  background: rgba(237, 234, 255, 0.9);
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+}
+.quiz-stage .mode-setup > div:first-child > p:last-child,
+.motus-stage .mode-setup > div:first-child > p:last-child,
+.definition-stage .mode-setup > div:first-child > p:last-child {
+  max-width: 34ch;
+  color: #59616d;
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  line-height: 1.18;
+}
+
+.quiz-stage .setup-guidance,
+.motus-stage .setup-guidance,
+.definition-stage .setup-guidance {
+  max-width: 570px;
+  padding: 12px 14px;
+  color: #424a58;
+  background: rgba(255, 255, 255, 0.76);
+  border: 1.5px solid var(--seyes-ink);
+  border-left: 5px solid var(--seyes-violet);
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 rgba(24, 29, 40, 0.14);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 1.45;
+}
+.quiz-stage .setup-guidance span,
+.motus-stage .setup-guidance span,
+.definition-stage .setup-guidance span {
+  padding: 0;
+  color: var(--seyes-violet);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.quiz-stage .setup-guidance b,
+.motus-stage .setup-guidance b,
+.definition-stage .setup-guidance b {
+  font-weight: 600;
+}
+
+.quiz-stage .setup-options button,
+.motus-stage .setup-options button,
+.definition-stage .setup-options button {
+  min-height: 138px;
+  color: var(--seyes-ink);
+  background: var(--seyes-card);
+  border: 1.5px solid var(--seyes-ink);
+  border-radius: 5px;
+  box-shadow: 4px 4px 0 var(--seyes-ink);
+}
+.quiz-stage .setup-options button:not(.is-active):hover,
+.motus-stage .setup-options button:not(.is-active):hover,
+.definition-stage .setup-options button:not(.is-active):hover {
+  border-color: var(--seyes-violet);
+  box-shadow: 6px 6px 0 var(--seyes-violet);
+  transform: translate(-2px, -2px);
+}
+.quiz-stage .setup-options button.is-active,
+.motus-stage .setup-options button.is-active,
+.definition-stage .setup-options button.is-active {
+  color: var(--seyes-ink);
+  border-color: var(--seyes-violet);
+  box-shadow: 6px 6px 0 var(--seyes-violet);
+}
+.quiz-stage .setup-options button.is-active::after,
+.motus-stage .setup-options button.is-active::after,
+.definition-stage .setup-options button.is-active::after {
+  color: var(--seyes-violet);
+  background: rgba(237, 234, 255, 0.88);
+  border-radius: 2px;
+}
+.quiz-stage .setup-options b,
+.motus-stage .setup-options b,
+.definition-stage .setup-options b {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 20px;
+}
+.quiz-stage .setup-options span,
+.motus-stage .setup-options span,
+.definition-stage .setup-options span {
+  color: #606978;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+}
+.quiz-stage .variant-mini,
+.motus-stage .variant-mini,
+.definition-stage .variant-mini {
+  color: var(--seyes-violet);
+}
+
+.quiz-stage .setup-start,
+.motus-stage .setup-start,
+.definition-stage .setup-start {
+  min-height: 48px;
+  color: #fff;
+  background: var(--seyes-ink);
+  border: 1px solid var(--seyes-ink);
+  border-radius: 3px;
+  box-shadow: 3px 3px 0 var(--seyes-violet);
+  font-family: "Space Grotesk", sans-serif;
+}
+.quiz-stage .setup-start:hover,
+.motus-stage .setup-start:hover,
+.definition-stage .setup-start:hover {
+  background: var(--seyes-violet);
+  border-color: var(--seyes-violet);
+  box-shadow: 5px 5px 0 var(--seyes-ink);
+  transform: translate(-2px, -2px);
+}
+.quiz-stage .multiplayer-link,
+.motus-stage .multiplayer-link,
+.definition-stage .multiplayer-link {
+  padding: 9px 3px;
+  color: var(--seyes-ink);
+  font-family: "IBM Plex Mono", monospace;
+}
+.quiz-stage .multiplayer-link span,
+.motus-stage .multiplayer-link span,
+.definition-stage .multiplayer-link span {
+  color: var(--seyes-violet);
+  background: rgba(237, 234, 255, 0.9);
+  border-radius: 2px;
+}
+.quiz-stage .back-control,
+.motus-stage .back-control,
+.definition-stage .back-control {
+  color: var(--seyes-ink);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1.5px solid var(--seyes-ink);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 rgba(24, 29, 40, 0.2);
+}
+.quiz-stage .stage-logo,
+.motus-stage .stage-logo,
+.definition-stage .stage-logo {
+  color: var(--seyes-ink);
+  font-family: "Space Grotesk", sans-serif;
+}
+.quiz-stage .stage-logo span,
+.motus-stage .stage-logo span,
+.definition-stage .stage-logo span {
+  color: #fff;
+  background: var(--seyes-violet);
+  border-radius: 3px;
+}
+.game-intro-overlay {
+  background: rgba(13, 16, 22, 0.68);
+  backdrop-filter: blur(7px);
+}
+.game-intro-sheet {
+  max-width: 840px;
+  color: var(--seyes-ink);
+  background-color: var(--seyes-paper);
+  background-image:
+    repeating-linear-gradient(
+      var(--seyes-subline) 0,
+      var(--seyes-subline) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      var(--seyes-master) 0,
+      var(--seyes-master) 1.5px,
+      transparent 1.5px,
+      transparent 32px
+    );
+  background-size: 100% 32px;
+  border: 2px solid var(--seyes-ink);
+  border-radius: 5px;
+  box-shadow:
+    10px 10px 0 rgba(7, 9, 12, 0.5),
+    0 25px 70px rgba(0, 0, 0, 0.45);
+}
+.game-intro-sheet::before {
+  left: clamp(42px, 7vw, 66px);
+  width: 2px;
+  background: var(--seyes-margin);
+  opacity: 0.74;
+}
+.game-intro-close {
+  color: var(--seyes-ink);
+  background: rgba(255, 255, 255, 0.84);
+  border: 1.5px solid var(--seyes-ink);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 var(--seyes-ink);
+}
+.game-intro-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding-right: 50px;
+}
+.game-intro-header .mini-label {
+  display: inline-block;
+  width: fit-content;
+  padding: 4px 7px;
+  color: var(--seyes-violet);
+  background: rgba(237, 234, 255, 0.92);
+  border-radius: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.game-intro-header h1 {
+  color: var(--seyes-ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+}
+.game-intro-header > div > p:last-child {
+  max-width: 46ch;
+  color: #606978;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  line-height: 1.45;
+}
+.game-intro-annotation {
+  flex: 0 0 auto;
+  margin-top: 14px;
+  color: var(--seyes-margin);
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  font-style: normal;
+  transform: rotate(-2deg);
+}
+.game-intro-visual,
+.game-intro-steps li,
+.game-intro-format,
+.game-intro-jokers,
+.game-intro-solo {
+  background: rgba(255, 255, 255, 0.82);
+  border: 1.5px solid var(--seyes-ink);
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 rgba(24, 29, 40, 0.13);
+}
+.game-intro-visual {
+  border-left: 5px solid var(--seyes-violet);
+}
+.intro-diagram {
+  background: rgba(237, 234, 255, 0.72);
+  border-radius: 3px;
+}
+.game-intro-visual > div:last-child span {
+  color: var(--seyes-violet);
+}
+.game-intro-visual > div:last-child b {
+  font-family: "Space Grotesk", sans-serif;
+}
+.game-intro-steps li {
+  padding: 11px;
+}
+.game-intro-steps b {
+  color: var(--seyes-violet);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.game-intro-steps span {
+  color: #505968;
+  font-size: 11px;
+}
+.game-intro-format {
+  color: var(--seyes-ink);
+  background: rgba(237, 234, 255, 0.82);
+}
+.game-intro-format span {
+  color: var(--seyes-violet);
+}
+.game-intro-jokers {
+  background: rgba(255, 255, 255, 0.88);
+}
+.game-intro-joker-heading svg,
+.game-intro-solo svg {
+  color: var(--seyes-violet);
+}
+.game-intro-joker-list article {
+  background: rgba(250, 247, 238, 0.9);
+  border: 1px solid rgba(24, 29, 40, 0.28);
+  border-radius: 3px;
+}
+.game-intro-joker-list b {
+  color: var(--seyes-ink);
+}
+.game-intro-joker-list span,
+.game-intro-joker-heading span,
+.game-intro-solo {
+  color: #5d6674;
+}
+.game-intro-more-jokers {
+  color: var(--seyes-violet);
+  border-color: var(--seyes-violet);
+  border-radius: 3px;
+}
+.game-intro-start {
+  color: #fff;
+  background: var(--seyes-ink);
+  border: 1px solid var(--seyes-ink);
+  border-radius: 3px;
+  box-shadow: 3px 3px 0 var(--seyes-violet);
+}
+.game-intro-start:hover {
+  background: var(--seyes-violet);
+  transform: translate(-2px, -2px);
+}
+
+.game-rules-poster {
+  color: var(--seyes-ink);
+  background-color: rgba(250, 247, 238, 0.92);
+  background-image:
+    repeating-linear-gradient(
+      var(--seyes-subline) 0,
+      var(--seyes-subline) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      var(--seyes-master) 0,
+      var(--seyes-master) 1.5px,
+      transparent 1.5px,
+      transparent 32px
+    );
+  background-size: 100% 32px;
+  border: 1.5px solid var(--seyes-ink);
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--seyes-ink);
+}
+.game-rules-summary-title svg,
+.game-rules-section-heading svg,
+.game-rules-joker-note svg,
+.game-rules-deck svg {
+  color: var(--seyes-violet);
+}
+.game-rules-section,
+.game-rules-joker-note,
+.game-rules-deck,
+.game-rules-jokers li {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(24, 29, 40, 0.3);
+  border-radius: 3px;
+}
+.game-rules-variant {
+  color: var(--seyes-ink);
+  background: rgba(237, 234, 255, 0.85);
+  border-left-color: var(--seyes-violet);
+}
+.game-rules-variant span {
+  color: var(--seyes-violet);
+}
+
+.intruder-method-note,
+.herbarium-discovery-note {
+  margin: 0.85rem 0 0;
+  padding: 0.65rem 0.8rem;
+  color: #36453d;
+  background: rgba(234, 229, 199, 0.66);
+  border-left: 3px solid var(--seyes-violet);
+  font:
+    1.04rem/1.15 "Caveat",
+    cursive;
+}
+.herbarium-discovery-note {
+  color: #254432;
+  border-left-color: #5f8c68;
+}
+
+.dark .quiz-stage,
+.dark .motus-stage,
+.dark .definition-stage {
+  --seyes-ink: #f2efe6;
+  --seyes-paper: #15181f;
+  --seyes-card: rgba(28, 33, 43, 0.95);
+  --seyes-master: rgba(128, 119, 194, 0.56);
+  --seyes-subline: rgba(128, 119, 194, 0.19);
+  --seyes-violet: #a49bff;
+  --seyes-margin: #ef6154;
+}
+.dark .quiz-stage .mode-setup > div:first-child > p:last-child,
+.dark .motus-stage .mode-setup > div:first-child > p:last-child,
+.dark .definition-stage .mode-setup > div:first-child > p:last-child,
+.dark .game-intro-header > div > p:last-child {
+  color: #c8cdda;
+}
+.dark .setup-guidance,
+.dark .game-intro-visual,
+.dark .game-intro-steps li,
+.dark .game-intro-jokers,
+.dark .game-intro-solo,
+.dark .game-intro-joker-list article,
+.dark .game-rules-section,
+.dark .game-rules-joker-note,
+.dark .game-rules-deck,
+.dark .game-rules-jokers li {
+  background: rgba(26, 31, 41, 0.91);
+  border-color: #596174;
+}
+.dark .game-intro-sheet,
+.dark .game-rules-poster {
+  color: #f2efe6;
+  background-color: #15181f;
+}
+.dark .game-intro-visual > div:last-child b,
+.dark .game-intro-steps span,
+.dark .game-intro-joker-list b,
+.dark .game-rules-poster {
+  color: #f2efe6;
+}
+.dark .game-intro-joker-list span,
+.dark .game-intro-joker-heading span,
+.dark .game-intro-solo {
+  color: #c8cdda;
+}
+.dark .game-intro-format,
+.dark .game-rules-variant {
+  color: #f2efe6;
+  background: #29254a;
+}
+.dark .intro-diagram {
+  background: #29254a;
+}
+
+@media (max-width: 900px) {
+  .quiz-stage::before,
+  .motus-stage::before,
+  .definition-stage::before {
+    left: 22px;
+  }
+  .quiz-stage .mode-setup,
+  .motus-stage .mode-setup,
+  .definition-stage .mode-setup {
+    margin-top: 86px;
+  }
+  .game-intro-header {
+    display: block;
+  }
+  .game-intro-annotation {
+    display: block;
+    width: fit-content;
+    margin: 6px 0 0;
+  }
+  .game-intro-sheet {
+    border-radius: 4px;
+  }
+}
+@media (max-width: 650px) {
+  .quiz-stage::before,
+  .motus-stage::before,
+  .definition-stage::before {
+    display: none;
+  }
+  .quiz-stage .mode-setup h1,
+  .motus-stage .mode-setup h1,
+  .definition-stage .mode-setup h1 {
+    font-size: clamp(45px, 14vw, 65px);
+  }
+  .quiz-stage .mode-setup > div:first-child > p:last-child,
+  .motus-stage .mode-setup > div:first-child > p:last-child,
+  .definition-stage .mode-setup > div:first-child > p:last-child {
+    font-size: 20px;
+  }
+  .quiz-stage .setup-options button,
+  .motus-stage .setup-options button,
+  .definition-stage .setup-options button {
+    min-height: 84px;
+  }
+  .game-intro-annotation {
+    font-size: 19px;
+  }
+  .game-intro-visual,
+  .game-intro-steps li,
+  .game-intro-format,
+  .game-intro-jokers,
+  .game-intro-solo {
+    box-shadow: 2px 2px 0 rgba(24, 29, 40, 0.13);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz-stage .setup-options button,
+  .motus-stage .setup-options button,
+  .definition-stage .setup-options button,
+  .game-intro-start,
+  .game-intro-close {
+    transition: none;
+  }
+}

@@ -1,0 +1,77 @@
+@media (max-width: 760px) {
+  .flow-create .multiplayer-intro,
+  .flow-create .multiplayer-flow-back {
+    display: none;
+  }
+  .flow-create h1 {
+    margin: 12px 0 16px;
+    font-size: clamp(42px, 12vw, 54px);
+    line-height: 0.9;
+  }
+  .flow-create .multiplayer-mode-switch {
+    margin-bottom: 10px;
+  }
+  .flow-create .atelier-room-form {
+    min-height: 0;
+    padding-bottom: calc(72px + var(--mobile-overlay-clearance));
+  }
+  .flow-create .table-sheet {
+    min-height: 0;
+    align-content: start;
+    padding: 16px;
+  }
+  .flow-create .table-sheet label {
+    margin: 0;
+  }
+  .flow-create .create-step {
+    display: none;
+  }
+  .flow-create .atelier-room-form.is-mobile-step-0 .table-sheet,
+  .flow-create .atelier-room-form.is-mobile-step-1 .challenge-sheet,
+  .flow-create .atelier-room-form.is-mobile-step-2 .rules-sheet {
+    display: grid;
+  }
+  .flow-create .rules-sheet {
+    min-height: 0;
+  }
+  .flow-create .desktop-create-submit {
+    display: none;
+  }
+  .mobile-create-nav {
+    position: fixed;
+    z-index: 45;
+    right: 12px;
+    bottom: calc(12px + var(--mobile-overlay-clearance));
+    left: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1.45fr;
+    gap: 7px;
+    padding: 7px;
+    background: color-mix(in srgb, var(--paper-sheet) 93%, transparent);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 10px 26px rgba(20, 27, 25, 0.14);
+  }
+  .mobile-create-nav button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 0 10px;
+    color: var(--ink);
+    background: var(--paper-note);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .mobile-create-nav button:last-child {
+    color: var(--paper-sheet);
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .mobile-create-nav button:disabled {
+    opacity: 0.44;
+  }
+}

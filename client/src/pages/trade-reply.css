@@ -1,0 +1,58 @@
+.trade-reply-card {
+  margin-top: 12px;
+  padding: 11px;
+  border: 1px dashed var(--green-ink);
+  background: rgba(255, 255, 255, 0.62);
+}
+.trade-reply-card p {
+  margin: 0;
+  font-size: 0.82rem;
+}
+.trade-reply-card strong {
+  display: inline-grid;
+  place-items: center;
+  min-width: 26px;
+  height: 26px;
+  margin: 0 3px;
+  background: var(--green-ink);
+  color: #fff;
+  font-family: var(--font-mono);
+}
+.trade-reply-letters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 9px;
+}
+.trade-reply-letters button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--green-ink);
+  background: #fff;
+  font-weight: 900;
+}
+.trade-reply-letters button.is-selected {
+  background: var(--lime);
+  transform: translateY(-2px);
+}
+.trade-reply-actions {
+  display: flex;
+  gap: 7px;
+  margin-top: 10px;
+}
+.trade-reply-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--green-ink);
+  padding: 7px 9px;
+  font-weight: 800;
+}
+.trade-reply-accept {
+  background: var(--green-ink);
+  color: #fff;
+}
+.trade-reply-decline {
+  background: transparent;
+  color: var(--ink);
+}

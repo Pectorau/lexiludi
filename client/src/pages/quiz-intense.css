@@ -1,0 +1,123 @@
+.quiz-intense-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: var(--paper-note);
+  font:
+    700 0.68rem "IBM Plex Mono",
+    monospace;
+}
+.quiz-hearts {
+  display: flex;
+  gap: 5px;
+  color: var(--red);
+}
+.quiz-hearts svg.is-empty {
+  color: var(--line);
+  fill: transparent;
+  opacity: 0.55;
+}
+.quiz-intense-hud p {
+  margin: 0;
+  color: var(--green-ink);
+}
+.quiz-intense-hud p b {
+  color: var(--ink);
+}
+.quiz-play.is-boss .quiz-sheet-content {
+  border-color: var(--red);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--red) 20%, transparent);
+}
+.quiz-play.is-boss .quiz-main h1 em {
+  color: var(--red);
+}
+.quiz-boss-timer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 80px;
+  padding: 5px 8px;
+  color: var(--paper-sheet);
+  background: var(--red);
+  font:
+    700 1rem "IBM Plex Mono",
+    monospace;
+}
+.quiz-boss-timer.is-critical {
+  animation: quiz-boss-pulse 850ms ease-in-out infinite;
+}
+.quiz-boss-transition,
+.quiz-campaign-end {
+  display: grid;
+  gap: 12px;
+  place-items: center;
+  padding: 34px 18px;
+  text-align: center;
+  border: 2px solid var(--ink);
+  background: var(--paper-sheet);
+}
+.quiz-boss-transition {
+  color: var(--red);
+  border-color: var(--red);
+  background: var(--brick-wash);
+}
+.quiz-boss-transition b {
+  font:
+    800 clamp(1.7rem, 7vw, 3rem) "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.quiz-campaign-end.is-victory {
+  border-color: var(--blue);
+  background: var(--soft-lime);
+}
+.quiz-campaign-end h2 {
+  margin: 0;
+  font:
+    700 clamp(1.7rem, 6vw, 2.7rem) "DM Serif Display",
+    Georgia,
+    serif;
+}
+.quiz-campaign-end p {
+  margin: 0;
+}
+.quiz-shake {
+  animation: quiz-shake 320ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes quiz-shake {
+  20%,
+  60% {
+    transform: translateX(-8px);
+  }
+  40%,
+  80% {
+    transform: translateX(8px);
+  }
+}
+@keyframes quiz-boss-pulse {
+  50% {
+    transform: scale(1.07);
+    filter: brightness(1.2);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz-boss-timer.is-critical,
+  .quiz-shake {
+    animation: none;
+  }
+}
+@media (max-width: 620px) {
+  .quiz-intense-hud {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .quiz-intense-hud p {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+  }
+}

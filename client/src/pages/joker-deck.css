@@ -1,0 +1,120 @@
+.joker-deck {
+  position: fixed;
+  z-index: 28;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  width: min(390px, calc(100vw - 32px));
+  color: #f0f5f2;
+  font-family: "IBM Plex Mono", monospace;
+}
+.joker-deck-trigger {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 52px 52px auto;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 11px;
+  color: inherit;
+  background: #16201a;
+  border: 1.5px solid #33483b;
+  box-shadow: 3px 3px 0 #0a100c;
+  text-align: left;
+  transition:
+    transform 160ms var(--ease-out, ease-out),
+    border-color 160ms var(--ease-out, ease-out);
+}
+.joker-deck-trigger:hover {
+  border-color: #85e09b;
+  transform: translateY(-2px);
+}
+.joker-deck-icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  color: #85e09b;
+  background: #24382c;
+  border: 1px solid #3e5a47;
+}
+.joker-deck-trigger b,
+.joker-deck-trigger small {
+  display: block;
+}
+.joker-deck-trigger b {
+  font-size: 10px;
+}
+.joker-deck-trigger small {
+  margin-top: 2px;
+  color: #aabdb0;
+  font-size: 8px;
+}
+.joker-tension {
+  height: 5px;
+  overflow: hidden;
+  background: #0a100c;
+  border: 1px solid #33483b;
+}
+.joker-tension i {
+  display: block;
+  height: 100%;
+  transition: width 180ms var(--ease-out, ease-out);
+}
+.joker-tension .is-attack {
+  background: #d57b73;
+}
+.joker-tension .is-defense {
+  background: #85e09b;
+}
+.joker-deck-chevron {
+  transition: transform 180ms var(--ease-out, ease-out);
+}
+.joker-deck.is-open .joker-deck-chevron {
+  transform: rotate(180deg);
+}
+.joker-deck-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    max-height 220ms var(--ease-out, ease-out),
+    opacity 160ms var(--ease-out, ease-out),
+    transform 180ms var(--ease-out, ease-out);
+}
+.joker-deck.is-open .joker-deck-content {
+  max-height: 520px;
+  overflow: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+.joker-deck .tactical-reserve {
+  margin: 8px 0 0;
+  background: #16201a;
+  border-color: #33483b;
+  box-shadow: 3px 3px 0 #0a100c;
+}
+.joker-deck .tactical-card {
+  background: #1c2720;
+  border-color: #33483b;
+}
+.joker-deck .tactical-card b {
+  color: #f0f5f2;
+}
+.joker-deck .tactical-card small,
+.joker-deck .tactical-empty {
+  color: #aabdb0;
+}
+@media (max-width: 640px) {
+  .joker-deck {
+    right: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    width: calc(100vw - 24px);
+  }
+  .joker-deck-trigger {
+    grid-template-columns: auto minmax(0, 1fr) 40px 40px auto;
+    padding: 8px;
+  }
+  .joker-tension {
+    height: 4px;
+  }
+}

@@ -1,0 +1,52 @@
+.admin-room-card {
+  padding: 12px 0;
+  border-bottom: 1px solid #2b382a;
+}
+.admin-room-card:last-child {
+  border-bottom: 0;
+}
+.admin-room-card .admin-room {
+  padding: 0;
+  border: 0;
+}
+.admin-room-players {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+}
+.admin-player-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 5px 4px 8px;
+  border: 1px solid #40523e;
+  border-radius: 999px;
+  color: #cbd5c7;
+  background: #121912;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+.admin-player-chip button {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 999px;
+  color: #f2b39d;
+  background: transparent;
+}
+.admin-player-chip button:hover:not(:disabled) {
+  color: #1b130f;
+  background: #f2b39d;
+}
+.admin-player-chip button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.admin-no-player {
+  color: #778773;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}

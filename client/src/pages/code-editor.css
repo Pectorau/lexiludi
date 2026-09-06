@@ -1,0 +1,318 @@
+.code-editor-shell {
+  min-height: 100vh;
+  padding: clamp(1rem, 2vw, 2rem);
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255, 205, 137, 0.35),
+      transparent 30rem
+    ),
+    #f7f2e8;
+  color: #25221e;
+}
+
+.code-editor-header {
+  max-width: 1520px;
+  margin: 0 auto 1rem;
+  display: flex;
+  gap: 1.25rem;
+  align-items: end;
+  justify-content: space-between;
+}
+
+.code-editor-heading {
+  display: grid;
+  gap: 0.85rem;
+}
+.code-editor-heading h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  letter-spacing: -0.075em;
+  line-height: 0.96;
+}
+.code-editor-heading h1 em {
+  color: #d1512e;
+  font-family: Caveat, cursive;
+  font-size: 1.18em;
+  letter-spacing: -0.03em;
+}
+.code-editor-back {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  gap: 0.45rem;
+  color: #60544a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+.code-editor-back:hover {
+  color: #d1512e;
+}
+
+.code-editor-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+.code-editor-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  color: #35694f;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+.code-editor-status.is-dirty {
+  color: #b13e23;
+}
+.code-editor-save {
+  min-width: 9rem;
+  background: #25221e;
+  color: #fff9ee;
+}
+.code-editor-save:hover {
+  background: #413931;
+}
+
+.code-editor-workbench {
+  max-width: 1520px;
+  min-height: min(73vh, 800px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(210px, 280px) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid #d9caba;
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(72, 48, 25, 0.16);
+  background: #201f22;
+}
+
+.code-editor-sidebar {
+  min-width: 0;
+  overflow: auto;
+  background: #f0e7d7;
+  color: #383129;
+}
+.code-editor-sidebar-header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem;
+  border-bottom: 1px solid #d7c7b4;
+  background: #f0e7d7;
+}
+.code-editor-sidebar-header b {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 0.94rem;
+}
+.code-editor-icon-button {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid #d4c1a9;
+  border-radius: 8px;
+  color: #5b4b3d;
+  background: #fcf7ee;
+  cursor: pointer;
+}
+.code-editor-icon-button:hover {
+  color: #d1512e;
+  border-color: #d1512e;
+}
+.code-editor-sidebar-empty {
+  display: flex;
+  gap: 0.55rem;
+  align-items: center;
+  padding: 1.25rem;
+  color: #6d5e50;
+  font-size: 0.86rem;
+}
+
+.code-editor-tree {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.code-editor-tree-item {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 2rem;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  text-align: left;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.code-editor-tree-item span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.code-editor-folder {
+  color: #6b5948;
+  font-weight: 700;
+}
+.code-editor-folder:hover {
+  background: rgba(110, 83, 56, 0.08);
+}
+.code-editor-file {
+  color: #3e3832;
+}
+.code-editor-file:hover {
+  background: rgba(110, 83, 56, 0.1);
+}
+.code-editor-file.is-selected {
+  color: #fbfaf7;
+  background: #3d3833;
+  font-weight: 700;
+}
+
+.code-editor-pane {
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: #1e1e1e;
+}
+.code-editor-tabbar {
+  display: flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-right: 1rem;
+  color: #bdbdc2;
+  background: #29282c;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.75rem;
+}
+.code-editor-tabbar time {
+  color: #85858d;
+  white-space: nowrap;
+}
+.code-editor-tab {
+  display: flex;
+  min-width: 0;
+  align-self: stretch;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0 1rem;
+  border-top: 2px solid #dd744b;
+  background: #1e1e1e;
+  color: #e9e9e9;
+}
+.code-editor-tab span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.code-editor-canvas {
+  min-height: 0;
+  position: relative;
+}
+.code-editor-state {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 0.7rem;
+  color: #bdbdc2;
+  text-align: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.85rem;
+}
+.code-editor-state-error {
+  color: #ffa78b;
+}
+.code-editor-footer {
+  display: flex;
+  min-height: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 1rem;
+  border-top: 1px solid #3b3a40;
+  color: #94949c;
+  background: #29282c;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+}
+
+.code-editor-loading,
+.code-editor-guard {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  gap: 0.7rem;
+  padding: 2rem;
+  background: #f7f2e8;
+  color: #302a24;
+  text-align: center;
+}
+.code-editor-loading {
+  grid-auto-flow: column;
+  align-items: center;
+}
+.code-editor-guard h1 {
+  margin: 0;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2rem;
+}
+.code-editor-guard p {
+  max-width: 28rem;
+  margin: 0;
+  color: #695d51;
+}
+.code-editor-login {
+  margin: 0.3rem auto 0;
+  background: #25221e;
+  color: #fff9ee;
+}
+.code-editor-guard a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  color: #b5482c;
+  font-weight: 800;
+}
+
+@media (max-width: 760px) {
+  .code-editor-shell {
+    padding: 1rem 0.75rem;
+  }
+  .code-editor-header {
+    align-items: start;
+    flex-direction: column;
+  }
+  .code-editor-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .code-editor-workbench {
+    min-height: 75vh;
+    grid-template-columns: minmax(145px, 42vw) minmax(0, 1fr);
+    border-radius: 12px;
+  }
+  .code-editor-status {
+    max-width: 9rem;
+  }
+  .code-editor-tabbar time,
+  .code-editor-footer span:nth-child(3) {
+    display: none;
+  }
+  .code-editor-footer {
+    justify-content: space-between;
+  }
+}

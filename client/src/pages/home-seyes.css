@@ -1,0 +1,279 @@
+.home-seyes {
+  min-height: 100vh;
+  padding: 96px 24px 56px;
+  background-color: #0f1217;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 24px 24px;
+}
+.seyes-sheet {
+  position: relative;
+  display: grid;
+  gap: 22px;
+  width: min(100%, 1160px);
+  min-height: 680px;
+  margin: 0 auto;
+  padding: 32px 36px 28px clamp(60px, 8vw, 100px);
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    repeating-linear-gradient(
+      rgba(121, 113, 194, 0.22) 0,
+      rgba(121, 113, 194, 0.22) 1px,
+      transparent 1px,
+      transparent 8px
+    ),
+    repeating-linear-gradient(
+      rgba(121, 113, 194, 0.65) 0,
+      rgba(121, 113, 194, 0.65) 1.5px,
+      transparent 1.5px,
+      transparent 32px
+    );
+  background-size: 100% 32px;
+  border: 2px solid var(--ink);
+  border-radius: 4px 8px 8px 4px;
+  box-shadow:
+    -10px 0 25px rgba(0, 0, 0, 0.4),
+    15px 25px 60px rgba(0, 0, 0, 0.6);
+}
+.seyes-sheet::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: clamp(48px, 6.5vw, 76px);
+  width: 2px;
+  background: var(--red-margin);
+  content: "";
+  opacity: 0.75;
+}
+.seyes-sheet-head {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px 22px;
+}
+.seyes-sheet-head p {
+  margin: 0 0 4px;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.seyes-sheet-head h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(32px, 4vw, 46px);
+  line-height: 1;
+}
+.seyes-sheet-head h1 em {
+  color: var(--blue);
+  font-style: italic;
+  text-decoration: underline wavy var(--red-margin);
+  text-underline-offset: 6px;
+}
+.seyes-sheet-head aside {
+  color: var(--red-margin);
+  font-family: "Caveat", cursive;
+  font-size: 22px;
+  transform: rotate(-2deg);
+}
+.seyes-sheet-head .home-variant-switch {
+  grid-column: 1 / -1;
+  justify-self: end;
+}
+.seyes-arena {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.9fr);
+  gap: 28px;
+  align-items: center;
+  padding: clamp(20px, 3vw, 28px) clamp(20px, 4vw, 36px);
+  background: color-mix(in srgb, var(--paper-sheet) 94%, transparent);
+  border: 2px solid var(--ink);
+  border-radius: 6px;
+  box-shadow: 6px 6px 0 var(--ink);
+}
+.seyes-brief {
+  display: grid;
+  gap: 10px;
+}
+.seyes-brief b {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.seyes-brief p {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--paper-sheet);
+  border: 1.5px solid var(--ink);
+  border-left: 5px solid var(--blue);
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+.seyes-brief span {
+  color: var(--red-margin);
+  font-family: "Caveat", cursive;
+  font-size: 19px;
+}
+.seyes-motus-preview {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+.seyes-motus-preview > div {
+  display: flex;
+  gap: 6px;
+}
+.seyes-motus-preview i {
+  display: grid;
+  width: 42px;
+  height: 46px;
+  place-items: center;
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 var(--ink);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 800;
+}
+.seyes-motus-preview > div:first-child i:nth-child(-n + 2) {
+  color: #fff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.seyes-daily-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 12px 18px;
+  color: #fff;
+  background: var(--ink);
+  box-shadow: 3px 3px 0 var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.seyes-workshops {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.seyes-workshops a {
+  display: grid;
+  align-content: space-between;
+  gap: 4px;
+  min-height: 112px;
+  padding: 14px 18px;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper-sheet) 94%, transparent);
+  border: 1.5px solid var(--ink);
+  border-radius: 5px;
+  box-shadow: 3px 3px 0 var(--ink);
+  text-decoration: none;
+  transition:
+    transform 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 140ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 140ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.seyes-workshops a:hover {
+  border-color: var(--blue);
+  box-shadow: 5px 5px 0 var(--blue);
+  transform: translate(-2px, -2px);
+}
+.seyes-workshops span {
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.seyes-workshops b {
+  font-size: 16px;
+}
+.seyes-workshops small {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+}
+.seyes-workshops i {
+  display: grid;
+  width: 26px;
+  height: 26px;
+  place-items: center;
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  font-style: normal;
+}
+.seyes-footer {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .home-seyes {
+    padding: 76px 14px 30px;
+  }
+  .seyes-sheet {
+    padding: 24px 20px;
+  }
+  .seyes-sheet::before {
+    display: none;
+  }
+  .seyes-sheet-head {
+    grid-template-columns: 1fr;
+  }
+  .seyes-sheet-head .home-variant-switch {
+    justify-self: start;
+  }
+  .seyes-arena {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .seyes-workshops {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 520px) {
+  .seyes-sheet {
+    gap: 18px;
+  }
+  .seyes-sheet h1 {
+    font-size: 35px;
+  }
+  .seyes-sheet-head aside {
+    font-size: 19px;
+  }
+  .seyes-motus-preview i {
+    width: 35px;
+    height: 40px;
+  }
+  .seyes-workshops a {
+    min-height: 96px;
+  }
+  .seyes-footer {
+    font-size: 8px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .seyes-workshops a {
+    transition: none;
+  }
+}

@@ -1,0 +1,53 @@
+.admin-analytics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+}
+.admin-chart {
+  padding: 18px;
+  border: 1px solid #344033;
+  border-radius: 10px;
+  background: #182018;
+}
+.admin-chart h2 {
+  margin: 0;
+  font-size: 15px;
+}
+.admin-chart p {
+  min-height: 38px;
+  margin: 7px 0 14px;
+  color: #a9b5a6;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.bar-stack {
+  display: grid;
+  gap: 9px;
+}
+.bar-stack > div {
+  display: grid;
+  grid-template-columns: 72px minmax(30px, 1fr) 24px;
+  align-items: center;
+  gap: 8px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+}
+.bar-stack i {
+  display: block;
+  min-width: 4px;
+  height: 8px;
+  border-radius: 999px;
+  background: #bce66d;
+}
+.bar-stack b {
+  font-weight: 500;
+  text-align: right;
+}
+.bar-stack small {
+  color: #a9b5a6;
+  font-size: 11px;
+}
+@media (max-width: 850px) {
+  .admin-analytics {
+    grid-template-columns: 1fr;
+  }
+}

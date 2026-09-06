@@ -1,0 +1,74 @@
+.edit-toolbar {
+  position: fixed;
+  z-index: 135;
+  bottom: 14px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  max-width: calc(100vw - 20px);
+  padding: 7px;
+  overflow: auto;
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border: 1px solid var(--ink);
+  box-shadow: 4px 4px 0 color-mix(in srgb, var(--ink) 20%, transparent);
+  transform: translateX(-50%);
+  font-family: "IBM Plex Mono", monospace;
+  white-space: nowrap;
+}
+.edit-toolbar button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 30px;
+  padding: 5px 8px;
+  color: var(--ink);
+  background: var(--paper-note);
+  border: 1px solid var(--line);
+  font: inherit;
+  font-size: 8px;
+}
+.edit-toolbar button:hover:not(:disabled) {
+  border-color: var(--blue);
+  color: var(--blue);
+}
+.edit-toolbar button:disabled {
+  opacity: 0.4;
+}
+.edit-toolbar button.is-preview {
+  color: var(--paper-sheet);
+  background: var(--amber);
+  border-color: var(--amber);
+}
+.edit-toolbar button.is-dirty {
+  color: var(--paper-sheet);
+  background: var(--blue);
+  border-color: var(--blue);
+}
+.edit-toolbar i {
+  display: block;
+  flex: 0 0 1px;
+  width: 1px;
+  height: 18px;
+  background: var(--line);
+}
+@media (max-width: 760px) {
+  .edit-toolbar {
+    bottom: 62px;
+    left: 10px;
+    width: calc(100% - 20px);
+    max-width: none;
+    transform: none;
+  }
+  .edit-toolbar button {
+    min-width: 34px;
+    font-size: 0;
+  }
+  .edit-toolbar button svg {
+    margin: 0;
+  }
+  .edit-toolbar i {
+    display: none;
+  }
+}

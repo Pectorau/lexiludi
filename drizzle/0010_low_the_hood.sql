@@ -1,0 +1,4 @@
+ALTER TABLE `multiplayer_joker_uses` MODIFY COLUMN `joker` enum('compass','tempo','second_chance','fog','shield','bonus_attempt','random_letter','peek','opponent_progress','exact_letter','trade_letter') NOT NULL;--> statement-breakpoint
+ALTER TABLE `multiplayer_player_rewards` MODIFY COLUMN `joker` enum('compass','tempo','second_chance','fog','shield','bonus_attempt','random_letter','peek','opponent_progress','exact_letter','trade_letter') NOT NULL;--> statement-breakpoint
+ALTER TABLE `multiplayer_players` ADD `last_reward_message` text;--> statement-breakpoint
+ALTER TABLE `multiplayer_rooms` ADD `allowed_jokers` text;

@@ -1,0 +1,42 @@
+.room-system-announcement {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: min(100%, 760px);
+  margin: 0 auto 14px;
+  border: 1px solid rgba(102, 82, 191, 0.42);
+  border-left: 4px solid #6652bf;
+  background: rgba(246, 242, 255, 0.86);
+  box-shadow: 2px 2px 0 rgba(39, 32, 86, 0.12);
+  padding: 10px 12px;
+  color: #292344;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  line-height: 1.45;
+}
+.room-system-announcement b {
+  flex: 0 0 auto;
+  color: #5b44bb;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.room-system-announcement span {
+  min-width: 0;
+}
+.dark .room-system-announcement {
+  border-color: rgba(166, 145, 255, 0.55);
+  border-left-color: #ad97ff;
+  color: #e7e1ff;
+  background: rgba(42, 35, 72, 0.92);
+}
+.dark .room-system-announcement b {
+  color: #cfbfff;
+}
+@media (max-width: 680px) {
+  .room-system-announcement {
+    margin-bottom: 10px;
+    padding: 9px 10px;
+    font-size: 10px;
+  }
+}

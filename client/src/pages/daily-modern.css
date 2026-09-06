@@ -1,0 +1,351 @@
+.modern-daily {
+  display: grid;
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 620px;
+}
+.modern-daily-status {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--paper-note);
+  border: 1px solid var(--line);
+  box-shadow: 3px 3px 0 color-mix(in srgb, var(--ink) 10%, transparent);
+}
+.modern-daily-status > div:first-child {
+  display: grid;
+  gap: 2px;
+}
+.modern-daily-status b {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--blue);
+  font:
+    700 1.55rem "IBM Plex Mono",
+    monospace;
+}
+.modern-daily-status b small {
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+.modern-daily-status em {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  color: var(--green-ink);
+  font:
+    700 0.63rem "IBM Plex Mono",
+    monospace;
+  font-style: normal;
+}
+.modern-daily-status > p {
+  margin: 0;
+  color: var(--muted);
+  font:
+    600 0.72rem "IBM Plex Mono",
+    monospace;
+}
+.daily-score-ring {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: conic-gradient(var(--blue) var(--daily-score), var(--line) 0);
+  box-shadow: inset 0 0 0 6px var(--paper-note);
+  color: var(--ink);
+  font:
+    700 0.65rem "IBM Plex Mono",
+    monospace;
+}
+.daily-score-ring svg {
+  width: 14px;
+  height: 14px;
+  color: var(--blue);
+}
+.modern-definition {
+  padding: 16px;
+  background: color-mix(in srgb, var(--paper-note) 85%, transparent);
+  border: 1px solid var(--line);
+}
+.modern-definition > p:nth-child(2) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 10px;
+  font:
+    500 clamp(1rem, 2.1vw, 1.25rem) "DM Serif Display",
+    Georgia,
+    serif;
+  line-height: 1.65;
+}
+.modern-definition button {
+  min-height: 30px;
+  padding: 2px 7px;
+  color: transparent;
+  background: var(--paper);
+  border: 1px dashed var(--line);
+  border-radius: 4px;
+  cursor: pointer;
+  filter: blur(2px);
+  transition:
+    filter 160ms var(--ease-out),
+    background 160ms var(--ease-out),
+    color 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+.modern-definition button:hover:not(:disabled),
+.modern-definition button:focus-visible {
+  filter: blur(0);
+  background: var(--soft-blue);
+  transform: translateY(-1px);
+}
+.modern-definition button.is-revealed {
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border-style: solid;
+  filter: none;
+}
+.modern-definition small,
+.modern-auction-note {
+  color: var(--muted);
+  font:
+    500 0.68rem "IBM Plex Mono",
+    monospace;
+  line-height: 1.45;
+}
+.modern-daily-hints {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.modern-daily-hints button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--line);
+  background: var(--paper-note);
+  color: var(--ink);
+  padding: 7px 9px;
+  font:
+    700 0.65rem "IBM Plex Mono",
+    monospace;
+}
+.modern-daily-hints p {
+  margin: 0;
+  color: var(--green-ink);
+  font-size: 0.78rem;
+}
+.modern-attempt-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px dashed var(--line);
+}
+.modern-attempt-history p {
+  width: 100%;
+  margin: 0;
+}
+.modern-attempt-history span {
+  padding: 4px 6px;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  background: var(--paper-note);
+  font:
+    700 0.65rem "IBM Plex Mono",
+    monospace;
+}
+.modern-attempt-history span.is-correct {
+  color: var(--green-ink);
+  border-color: var(--blue);
+}
+.modern-attempt-history span.is-failed {
+  color: var(--red);
+  border-color: color-mix(in srgb, var(--red) 52%, var(--line));
+  text-decoration: line-through;
+}
+.modern-daily-form {
+  display: grid;
+  gap: 6px;
+}
+.modern-daily-form label {
+  color: var(--muted);
+  font:
+    700 0.65rem "IBM Plex Mono",
+    monospace;
+  text-transform: uppercase;
+}
+.modern-daily-form > div {
+  display: flex;
+  gap: 7px;
+}
+.modern-daily-form input {
+  min-width: 0;
+  flex: 1;
+  padding: 10px 11px;
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border: 1px solid var(--line);
+  font:
+    700 0.78rem "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.08em;
+}
+.modern-daily-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 9px 12px;
+  color: var(--paper-sheet);
+  background: var(--blue);
+  border: 1px solid var(--blue);
+  font:
+    700 0.7rem "IBM Plex Mono",
+    monospace;
+}
+.modern-daily-form button:disabled {
+  opacity: 0.5;
+}
+.modern-daily-notice {
+  margin: 0;
+  padding: 8px 10px;
+  color: var(--green-ink);
+  background: var(--soft-lime);
+  border-left: 3px solid var(--blue);
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+.modern-bankrupt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  color: var(--red);
+  background: var(--brick-wash);
+  border-left: 3px solid var(--red);
+  font:
+    700 0.7rem "IBM Plex Mono",
+    monospace;
+}
+.modern-auction-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  padding: 13px;
+  background: var(--paper-note);
+  border: 1px solid var(--line);
+}
+.modern-auction-grid button {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  width: 48px;
+  min-height: 58px;
+  color: var(--muted);
+  background: var(--paper-sheet);
+  border: 1px solid var(--line);
+  font:
+    700 0.92rem "IBM Plex Mono",
+    monospace;
+  cursor: pointer;
+  transition:
+    transform 160ms var(--ease-out),
+    border-color 160ms var(--ease-out);
+}
+.modern-auction-grid button:hover:not(:disabled),
+.modern-auction-grid button:focus-visible {
+  border-color: var(--saffron);
+  transform: translateY(-2px);
+}
+.modern-auction-grid button.is-revealed {
+  color: var(--green-ink);
+  background: var(--soft-lime);
+  border-color: var(--blue);
+}
+.modern-auction-grid button small {
+  color: var(--saffron);
+  font-size: 0.52rem;
+}
+.modern-auction-grid button:disabled:not(.is-revealed) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.modern-auction-clues {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+  padding: 11px;
+  border: 1px solid var(--line);
+  background: var(--paper-note);
+}
+.modern-auction-clues .mini-label {
+  grid-column: 1/-1;
+  margin: 0;
+}
+.modern-auction-clues button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px;
+  color: var(--ink);
+  background: var(--paper-sheet);
+  border: 1px solid var(--line);
+  font:
+    700 0.65rem "IBM Plex Mono",
+    monospace;
+}
+.modern-auction-clues button b {
+  color: var(--saffron);
+}
+.modern-auction-clues button:disabled {
+  opacity: 0.5;
+}
+.modern-auction-finish {
+  margin: 0;
+  padding: 10px;
+  border-left: 3px solid var(--red);
+  background: var(--brick-wash);
+  font-weight: 700;
+}
+.modern-auction-finish.is-won {
+  color: var(--green-ink);
+  border-color: var(--blue);
+  background: var(--soft-lime);
+}
+@media (max-width: 620px) {
+  .modern-daily-status {
+    padding: 10px;
+  }
+  .modern-daily-status b {
+    font-size: 1.25rem;
+  }
+  .modern-auction-grid {
+    gap: 5px;
+    padding: 9px;
+  }
+  .modern-auction-grid button {
+    width: 42px;
+    min-height: 52px;
+  }
+  .modern-daily-form > div {
+    flex-direction: column;
+  }
+  .modern-daily-form button {
+    min-height: 42px;
+  }
+  .modern-auction-clues {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,202 @@
+.knowledge-exchange {
+  position: fixed;
+  z-index: 32;
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  left: max(12px, env(safe-area-inset-left));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 860px;
+  margin: auto;
+  padding: 8px 10px;
+  border: 1px solid var(--green-ink);
+  background: color-mix(in srgb, var(--paper-sheet) 93%, transparent);
+  box-shadow: 3px 3px 0 rgba(24, 75, 58, 0.18);
+  backdrop-filter: blur(8px);
+}
+.knowledge-exchange-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+.knowledge-exchange-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  color: var(--green-ink);
+  font: 800 0.65rem var(--font-mono);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+.knowledge-letter-strip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  overflow-x: auto;
+}
+.knowledge-letter-strip button,
+.knowledge-reply-letters button {
+  display: grid;
+  place-items: center;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  border: 1px solid var(--green-ink);
+  background: #fff;
+  color: var(--ink);
+  font: 900 0.78rem var(--font-mono);
+  cursor: grab;
+}
+.knowledge-letter-strip button.is-selected,
+.knowledge-letter-strip button.is-dragging,
+.knowledge-reply-letters button.is-selected {
+  background: var(--lime);
+  transform: translateY(-2px);
+}
+.knowledge-letter-strip button.is-dragging {
+  opacity: 0.45;
+}
+.knowledge-letter-strip small {
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 0.69rem;
+}
+.knowledge-targets {
+  display: flex;
+  gap: 5px;
+  min-width: 0;
+  margin-left: auto;
+  overflow-x: auto;
+}
+.knowledge-targets button {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  border: 1px solid var(--line);
+  background: #fff;
+  padding: 4px 7px;
+  white-space: nowrap;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+.knowledge-targets button.is-drop-target {
+  border-color: var(--green-ink);
+  background: var(--lime);
+  transform: translateY(-1px);
+}
+.knowledge-targets i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #b94c43;
+}
+.knowledge-targets i.is-online {
+  background: #54a972;
+}
+.knowledge-targets i.is-idle {
+  background: #d6a23c;
+}
+.knowledge-reply,
+.knowledge-outgoing {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  border-top: 1px dashed var(--line);
+  padding-top: 6px;
+  font-size: 0.72rem;
+}
+.knowledge-reply > span,
+.knowledge-outgoing > span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.knowledge-reply strong,
+.knowledge-outgoing strong {
+  display: inline-grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  background: var(--green-ink);
+  color: #fff;
+}
+.knowledge-reply-letters {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+}
+.knowledge-reply-letters button {
+  flex-basis: 24px;
+  width: 24px;
+  height: 24px;
+  font-size: 0.68rem;
+}
+.knowledge-reply > button,
+.knowledge-outgoing > button {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--green-ink);
+  background: #fff;
+}
+.knowledge-reply > button:first-of-type {
+  background: var(--green-ink);
+  color: #fff;
+}
+.knowledge-outgoing {
+  justify-content: space-between;
+  color: var(--muted);
+}
+.knowledge-outgoing b {
+  color: var(--ink);
+}
+.knowledge-toast {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 8px);
+  max-width: min(320px, calc(100vw - 24px));
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--green-ink);
+  background: var(--paper-note);
+  box-shadow: 2px 2px 0 rgba(24, 75, 58, 0.18);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+@media (max-width: 640px) {
+  .knowledge-exchange {
+    bottom: max(8px, env(safe-area-inset-bottom));
+    padding: 7px;
+  }
+  .knowledge-exchange-line {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .knowledge-targets {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+  }
+  .knowledge-targets button {
+    flex: 1;
+    justify-content: center;
+  }
+  .knowledge-reply,
+  .knowledge-outgoing {
+    flex-wrap: wrap;
+  }
+  .knowledge-reply-letters {
+    order: 3;
+    width: 100%;
+  }
+}

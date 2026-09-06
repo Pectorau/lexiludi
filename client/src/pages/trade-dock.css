@@ -1,0 +1,404 @@
+.trade-dock-banner {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  width: min(320px, calc(100vw - 32px));
+  box-sizing: border-box;
+  padding: 14px 16px;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--green-ink, #315f51);
+  border-radius: 8px;
+  box-shadow: 4px 4px 0 var(--green-ink, #315f51);
+  animation: trade-slide-in 0.22s var(--easy);
+}
+@keyframes trade-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.trade-dock-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.trade-tag {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.trade-timer {
+  padding: 2px 6px;
+  color: #a83227;
+  background: #fdf2e9;
+  border: 1px solid #a83227;
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+}
+.trade-text {
+  margin: 0 0 12px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.letter-badge {
+  display: inline-block;
+  min-width: 1.05em;
+  padding: 1px 6px;
+  color: var(--blue);
+  background: var(--soft-blue);
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  text-align: center;
+}
+.trade-buttons {
+  display: flex;
+  gap: 8px;
+}
+.trade-btn-accept,
+.trade-btn-decline,
+.trade-btn-cancel,
+.trade-btn-submit {
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+}
+.trade-btn-accept {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #fff;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+}
+.trade-btn-decline {
+  color: #a83227;
+  background: var(--white);
+  border: 1px solid #a83227;
+}
+.trade-modal-overlay {
+  position: fixed;
+  z-index: 1100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow-y: auto;
+  padding: 16px;
+  background: rgb(20 32 26 / 52%);
+  backdrop-filter: blur(3px);
+}
+.trade-modal-card {
+  position: relative;
+  width: min(420px, 100%);
+  box-sizing: border-box;
+  padding: 24px;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--blue);
+  border-radius: 10px;
+  box-shadow: 6px 6px 0 var(--blue);
+}
+.trade-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+.trade-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: var(--blue);
+}
+.trade-modal-title h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.trade-modal-subtitle {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.trade-modal-notice {
+  margin: 0 0 14px;
+  padding: 9px 10px;
+  color: #62450d;
+  background: #fff9e9;
+  border-left: 4px solid #b7791f;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.trade-field {
+  margin-bottom: 14px;
+}
+.trade-field label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.trade-field select {
+  width: 100%;
+  min-height: 40px;
+  box-sizing: border-box;
+  padding: 8px 10px;
+  color: var(--ink);
+  background: var(--white);
+  border: 1px solid var(--blue);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+}
+.trade-field select:disabled {
+  color: var(--muted);
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+.trade-grid-letters {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+.trade-modal-error {
+  margin: 0 0 12px;
+  color: #a83227;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.trade-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.trade-btn-cancel {
+  color: var(--muted);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+.trade-btn-submit {
+  color: #fff;
+  background: var(--blue);
+  border: 1px solid var(--blue);
+}
+.trade-btn-accept:disabled,
+.trade-btn-decline:disabled,
+.trade-btn-cancel:disabled,
+.trade-btn-submit:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+.trade-btn-accept:focus-visible,
+.trade-btn-decline:focus-visible,
+.trade-btn-cancel:focus-visible,
+.trade-btn-submit:focus-visible,
+.trade-field select:focus-visible,
+.trade-modal-close:focus-visible {
+  outline: 3px solid #d8a600;
+  outline-offset: 2px;
+}
+.dark .trade-dock-banner,
+.dark .trade-modal-card {
+  background: var(--white);
+  border-color: var(--blue);
+  box-shadow: 4px 4px 0 var(--blue);
+}
+.dark .trade-btn-decline,
+.dark .trade-btn-cancel,
+.dark .trade-field select {
+  color: var(--ink);
+  background: var(--paper);
+}
+.game-stage > .trade-dock-banner,
+.game-stage > .trade-modal-overlay {
+  position: fixed;
+  z-index: 120;
+}
+@media (max-width: 520px) {
+  .trade-dock-banner {
+    top: auto;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    width: auto;
+  }
+  .trade-modal-overlay {
+    align-items: end;
+    padding: 12px;
+  }
+  .trade-modal-card {
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 4px 4px 0 var(--blue);
+  }
+}
+@media (max-width: 360px) {
+  .trade-grid-letters {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .trade-modal-actions {
+    flex-direction: column-reverse;
+  }
+  .trade-modal-actions button {
+    width: 100%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trade-dock-banner {
+    animation: none;
+  }
+}
+.letter-trade-dock {
+  margin: 14px 0;
+  padding: 14px;
+  border: 1px solid var(--green-ink);
+  background: var(--paper-note);
+  box-shadow: 4px 4px 0 rgba(24, 75, 58, 0.16);
+}
+.letter-trade-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+.letter-trade-heading span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.letter-trade-heading small,
+.letter-trade-note {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+.letter-trade-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin-top: 11px;
+}
+.letter-trade-source p,
+.letter-trade-targets p {
+  margin: 0 0 6px;
+  font: 700 0.68rem var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.letter-trade-source > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.letter-trade-source button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--green-ink);
+  background: #fff;
+  font-weight: 900;
+  cursor: grab;
+}
+.letter-trade-source button.is-selected,
+.letter-trade-source button.is-dragging {
+  background: var(--lime);
+  transform: translateY(-2px);
+}
+.letter-trade-arrow {
+  color: var(--green-ink);
+}
+.letter-trade-targets > div {
+  display: grid;
+  gap: 6px;
+}
+.letter-trade-targets button {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: 1px dashed var(--green-ink);
+  background: rgba(255, 255, 255, 0.58);
+  padding: 7px 9px;
+  text-align: left;
+  font-weight: 700;
+}
+.letter-trade-targets button.is-drop-target {
+  border-style: solid;
+  background: rgba(206, 234, 118, 0.45);
+}
+.letter-trade-targets button:active {
+  transform: scale(0.98);
+}
+.letter-trade-empty {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+.letter-trade-note {
+  margin: 10px 0 0;
+}
+.letter-trade-message {
+  margin: 8px 0 0;
+  color: var(--green-ink);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+@media (max-width: 640px) {
+  .letter-trade-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .letter-trade-layout {
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+  .letter-trade-arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+  }
+  .letter-trade-targets > div {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

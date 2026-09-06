@@ -1,0 +1,91 @@
+.grimoire-trigger {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.35rem;
+  z-index: 72;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  pointer-events: auto;
+}
+.grimoire-trigger > span {
+  max-width: 0;
+  overflow: hidden;
+  padding: 0.42rem 0;
+  color: var(--seyes-ink, #25283a);
+  white-space: nowrap;
+  background: rgba(255, 252, 241, 0.94);
+  border: 1px solid rgba(99, 89, 174, 0.35);
+  border-radius: 999px;
+  box-shadow: 2px 2px 0 rgba(41, 38, 75, 0.16);
+  font:
+    italic 0.73rem Georgia,
+    serif;
+  opacity: 0;
+  transform: translateX(0.6rem);
+  transition:
+    max-width 180ms var(--ease-out, ease-out),
+    padding 180ms var(--ease-out, ease-out),
+    opacity 160ms ease-out,
+    transform 180ms var(--ease-out, ease-out);
+}
+.grimoire-trigger > span.is-visible {
+  max-width: 13rem;
+  padding: 0.42rem 0.72rem;
+  opacity: 1;
+  transform: translateX(0);
+}
+.grimoire-trigger a {
+  display: grid;
+  width: 2.9rem;
+  height: 2.9rem;
+  place-items: center;
+  color: rgba(37, 40, 58, 0.58);
+  background: rgba(255, 251, 238, 0.26);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  text-decoration: none;
+  backdrop-filter: blur(2px);
+  transition:
+    transform 180ms var(--ease-out, ease-out),
+    color 180ms ease-out,
+    background 180ms ease-out,
+    border-color 180ms ease-out,
+    box-shadow 180ms ease-out;
+}
+.grimoire-trigger a b {
+  padding-bottom: 0.16rem;
+  font:
+    900 2rem/1 Georgia,
+    serif;
+}
+.grimoire-trigger:hover a,
+.grimoire-trigger a:hover {
+  color: var(--seyes-violet, #6359ae);
+  background: #efe7d7;
+  border-color: var(--seyes-violet, #6359ae);
+  box-shadow: 3px 3px 0 rgba(41, 38, 75, 0.2);
+  transform: rotate(6deg) scale(1.08);
+}
+.grimoire-trigger a:focus-visible {
+  color: var(--seyes-violet, #6359ae);
+  background: #fffaf0;
+  border-color: var(--seyes-violet, #6359ae);
+  outline: 3px solid var(--seyes-margin, #c7525b);
+  outline-offset: 3px;
+}
+@media (max-width: 640px) {
+  .grimoire-trigger {
+    right: 0.85rem;
+    bottom: 0.85rem;
+  }
+  .grimoire-trigger > span {
+    display: none;
+  }
+  .grimoire-trigger a {
+    width: 2.65rem;
+    height: 2.65rem;
+    background: rgba(255, 251, 238, 0.75);
+    border-color: rgba(99, 89, 174, 0.35);
+  }
+}

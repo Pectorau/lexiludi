@@ -1,0 +1,181 @@
+.admin-room-notice {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.8fr) minmax(180px, 1.5fr) auto;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 12px;
+  border: 1px dashed #465a43;
+  border-radius: 8px;
+  background: #121912;
+}
+.admin-room-notice label {
+  display: grid;
+  gap: 5px;
+  color: #a9b5a6;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.admin-room-notice input,
+.admin-room-notice select {
+  min-height: 34px;
+  border: 1px solid #40523e;
+  border-radius: 5px;
+  color: #f4f0df;
+  background: #101510;
+  padding: 7px;
+  font: inherit;
+  text-transform: none;
+}
+.admin-room-notice button {
+  align-self: end;
+  min-height: 34px;
+}
+.admin-sandbox {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 22px;
+  border: 1px solid #344033;
+  border-radius: 10px;
+  background: #182018;
+}
+.admin-sandbox header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.admin-sandbox header p {
+  margin: 0 0 5px;
+  color: #a8c78a;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.admin-sandbox h2 {
+  margin: 0;
+  font-size: 24px;
+  letter-spacing: -0.04em;
+}
+.admin-sandbox header button,
+.admin-sandbox-inputs button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  border: 1px solid #40523e;
+  border-radius: 6px;
+  color: #f4f0df;
+  background: #253124;
+  padding: 8px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.admin-sandbox > p {
+  margin: 12px 0 18px;
+  color: #a9b5a6;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.admin-sandbox-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 9px;
+}
+.admin-sandbox-inputs label {
+  display: grid;
+  gap: 5px;
+  color: #a9b5a6;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+}
+.admin-sandbox-inputs input {
+  min-height: 38px;
+  border: 1px solid #40523e;
+  border-radius: 5px;
+  color: #f4f0df;
+  background: #101510;
+  padding: 8px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.admin-sandbox-inputs button {
+  align-self: end;
+  border-color: #bce66d;
+  color: #142111;
+  background: #bce66d;
+}
+.admin-sandbox-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #f2b39d !important;
+}
+.admin-sandbox-grid {
+  display: grid;
+  gap: 7px;
+  min-height: 126px;
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #2b382a;
+  border-radius: 7px;
+  background: #101510;
+}
+.admin-sandbox-grid > p {
+  margin: auto 0;
+  color: #778773;
+  font-size: 12px;
+  text-align: center;
+}
+.admin-sandbox-row {
+  display: flex;
+  gap: 5px;
+}
+.admin-sandbox-row span {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border: 1px solid #53604f;
+  color: #f4f0df;
+  background: #293028;
+  border-radius: 4px;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+}
+.admin-sandbox-row span.is-exact {
+  border-color: #bce66d;
+  color: #142111;
+  background: #bce66d;
+}
+.admin-sandbox-row span.is-present {
+  border-color: #e5c469;
+  color: #201c0d;
+  background: #e5c469;
+}
+.admin-sandbox-row span.is-absent {
+  border-color: #4d5a4a;
+  background: #273026;
+}
+@media (max-width: 700px) {
+  .admin-room-notice,
+  .admin-sandbox-inputs {
+    grid-template-columns: 1fr;
+  }
+  .admin-room-notice button,
+  .admin-sandbox-inputs button {
+    width: 100%;
+  }
+  .admin-sandbox {
+    padding: 16px;
+  }
+  .admin-sandbox header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

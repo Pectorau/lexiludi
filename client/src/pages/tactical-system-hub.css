@@ -1,0 +1,358 @@
+.room-main > .joker-deck,
+.room-main > .knowledge-exchange {
+  display: none !important;
+}
+.tactical-system-hub {
+  order: 2;
+  display: grid;
+  gap: 8px;
+  margin: 0 0 12px;
+  color: #eef4ef;
+}
+.tactical-resource,
+.tactical-trade,
+.tactical-hub-deck,
+.tactical-contracts {
+  overflow: hidden;
+  border: 1px solid #33483b;
+  background: #16201a;
+  box-shadow: 3px 3px 0 #0a100c;
+}
+.tactical-resource {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  font: 0.7rem var(--font-mono);
+}
+.tactical-resource span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #b7c5bc;
+}
+.tactical-resource b {
+  color: #85e09b;
+}
+.tactical-resource b small {
+  color: #b7c5bc;
+}
+.tactical-resource i {
+  height: 6px;
+  overflow: hidden;
+  background: #0a100c;
+}
+.tactical-resource i em {
+  display: block;
+  height: 100%;
+  background: #85e09b;
+  transition: width 0.2s var(--ease-out);
+}
+.tactical-trade {
+  padding: 10px;
+}
+.tactical-trade header,
+.tactical-contracts header,
+.tactical-hub-deck-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: #f0f5f2;
+  font: 700 0.73rem var(--font-mono);
+}
+.tactical-trade header > span,
+.tactical-contracts header > span,
+.tactical-hub-deck-trigger > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tactical-trade header button,
+.tactical-hub-deck-trigger {
+  border: 0;
+  background: transparent;
+  color: #85e09b;
+  cursor: pointer;
+}
+.tactical-hub-deck-trigger {
+  width: 100%;
+  padding: 10px;
+  background: #1c2720;
+}
+.tactical-hub-deck-trigger b {
+  color: #85e09b;
+}
+.tactical-letter-row,
+.tactical-incoming > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  min-height: 32px;
+  margin-top: 9px;
+}
+.tactical-letter-row button,
+.tactical-incoming button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #56715f;
+  background: #0f1813;
+  color: #f0f5f2;
+  font: 800 0.76rem var(--font-mono);
+}
+.tactical-letter-row button.is-selected,
+.tactical-incoming button.is-selected {
+  border-color: #85e09b;
+  background: #244936;
+  transform: translateY(-1px);
+}
+.tactical-letter-row small {
+  color: #b7c5bc;
+  font-size: 0.7rem;
+}
+.tactical-trade-targets,
+.tactical-offer,
+.tactical-incoming {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #496050;
+}
+.tactical-trade-targets {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 5px;
+  color: #b7c5bc;
+  font-size: 0.7rem;
+}
+.tactical-trade-targets b {
+  color: #85e09b;
+}
+.tactical-trade-targets button,
+.tactical-offer button,
+.tactical-incoming footer button,
+.hub-card > button,
+.hub-card footer button,
+.tactical-contracts button {
+  border: 1px solid #557c61;
+  background: #23382b;
+  color: #f0f5f2;
+  padding: 6px 8px;
+  font: 700 0.64rem var(--font-mono);
+  cursor: pointer;
+}
+.tactical-offer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  color: #c5d2c8;
+  font-size: 0.72rem;
+}
+.tactical-offer b,
+.tactical-incoming strong {
+  color: #85e09b;
+}
+.tactical-incoming {
+  background: #173126;
+  padding: 8px;
+}
+.tactical-incoming p {
+  margin: 0;
+  color: #dcebdc;
+  font-size: 0.72rem;
+}
+.tactical-incoming footer,
+.hub-card footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+.tactical-incoming footer button:first-child {
+  background: #2d6042;
+}
+.tactical-contracts {
+  padding: 9px;
+}
+.tactical-contracts > p {
+  margin: 8px 0 0;
+  color: #b7c5bc;
+  font-size: 0.68rem;
+}
+.tactical-contracts article {
+  margin-top: 7px;
+  padding: 7px;
+  border: 1px dashed #496050;
+  background: #1c2720;
+}
+.tactical-contracts article p,
+.tactical-contracts article footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+  font-size: 0.67rem;
+}
+.tactical-contracts article p span,
+.tactical-contracts article small {
+  color: #b7c5bc;
+}
+.tactical-contracts article footer {
+  align-items: center;
+  margin-top: 6px;
+}
+.tactical-hub-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 7px;
+  padding: 9px;
+}
+.hub-card {
+  display: flex;
+  min-height: 105px;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+  border: 1px solid #33483b;
+  background: #1c2720;
+}
+.hub-card.is-attack {
+  border-top: 3px solid #c96a60;
+}
+.hub-card.is-defense {
+  border-top: 3px solid #85e09b;
+}
+.hub-card.is-utility {
+  border-top: 3px solid #d9b65d;
+}
+.hub-card.is-targeting {
+  outline: 1px solid #f1d179;
+}
+.hub-card > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hub-card.is-attack svg {
+  color: #f0a197;
+}
+.hub-card.is-defense svg {
+  color: #85e09b;
+}
+.hub-card.is-utility svg {
+  color: #f1d179;
+}
+.hub-card b {
+  font-size: 0.75rem;
+}
+.hub-card p {
+  margin: 0;
+  color: #c5d2c8;
+  font-size: 0.66rem;
+  line-height: 1.3;
+}
+.hub-card > button {
+  margin-top: auto;
+}
+.tactical-hub-empty {
+  grid-column: 1/-1;
+  margin: 0;
+  padding: 12px;
+  color: #b7c5bc;
+  text-align: center;
+  font-size: 0.72rem;
+}
+.tactical-hub-toast {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #557c61;
+  background: #244936;
+  color: #eff7e8;
+  font-size: 0.72rem;
+}
+@media (max-width: 640px) {
+  .tactical-resource {
+    grid-template-columns: 1fr auto;
+  }
+  .tactical-resource i {
+    grid-column: 1/-1;
+  }
+  .tactical-hub-cards {
+    grid-template-columns: 1fr;
+  }
+  .hub-card {
+    min-height: 0;
+  }
+  .tactical-trade-targets button {
+    flex: 1;
+  }
+  .tactical-offer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+.letter-badge.is-correct {
+  background: #238636;
+  border-color: #2ea043;
+  color: #fff;
+}
+.letter-badge.is-present {
+  background: #9e6a03;
+  border-color: #d29922;
+  color: #fff;
+}
+.letter-badge.is-selected {
+  outline: 2px solid #85e09b;
+  outline-offset: 1px;
+  transform: translateY(-2px);
+}
+.hub-card.is-linked-highlight {
+  border-color: #85e09b;
+  box-shadow: 0 0 8px rgba(133, 224, 155, 0.3);
+}
+.tactical-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid #85e09b;
+  background: #244936;
+  color: #eff7e8;
+  font: 700 0.69rem var(--font-mono);
+}
+.tactical-confirm span {
+  flex: 1;
+  line-height: 1.35;
+}
+.tactical-confirm button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 29px;
+  border: 1px solid #85e09b;
+  background: #2d6042;
+  color: #f0f5f2;
+  padding: 5px 7px;
+  font: inherit;
+  cursor: pointer;
+}
+.tactical-confirm button:last-child {
+  border-color: #557c61;
+  background: #1c2720;
+}
+.tactical-confirm button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+.motus-stage .tactical-system-hub {
+  order: 4;
+}

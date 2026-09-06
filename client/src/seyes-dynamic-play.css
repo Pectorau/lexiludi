@@ -1,0 +1,698 @@
+/* Langage dynamique partagé : scènes de jeu, entrées et tables multijoueurs. */
+:root {
+  --seyes-dynamic-paper: rgba(255, 253, 245, 0.94);
+  --seyes-dynamic-line: rgba(77, 92, 190, 0.28);
+  --seyes-dynamic-blue: #5a51ba;
+  --seyes-dynamic-red: #d9483d;
+  --seyes-dynamic-ink: #1d2430;
+  --seyes-dynamic-shadow: 5px 5px 0 rgba(29, 36, 48, 0.14);
+}
+
+/* Fiches actives : même feuille encrée que l’accueil, sans changer le plateau. */
+.quiz-play,
+.motus-play,
+.definition-play,
+.daily-sheet,
+.room-main > .room-lobby,
+.room-main > .room-quiz,
+.room-main > .room-motus,
+.room-main > .room-definition {
+  position: relative;
+  isolation: isolate;
+}
+
+.quiz-play::before,
+.motus-play::before,
+.definition-play::before,
+.daily-sheet::before,
+.room-main > .room-lobby::before {
+  position: absolute;
+  z-index: 2;
+  top: -7px;
+  right: clamp(28px, 7vw, 72px);
+  width: 15px;
+  height: 43px;
+  border: 3px solid #9fa8b4;
+  border-bottom-color: transparent;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 2px 3px 5px rgba(23, 31, 40, 0.18);
+  content: "";
+  opacity: 0.86;
+  pointer-events: none;
+  transform: rotate(5deg);
+}
+
+.quiz-play .play-meta,
+.motus-play .play-meta,
+.definition-play .definition-meta,
+.daily-header .daily-kicker,
+.room-round-meta,
+.room-system-announcement {
+  color: var(--seyes-dynamic-blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.quiz-play .mini-label,
+.motus-play .mini-label,
+.definition-play .mini-label,
+.daily-sheet .mini-label,
+.room-lobby .mini-label,
+.room-main .mini-label {
+  color: var(--seyes-dynamic-blue);
+  background: rgba(235, 232, 255, 0.9);
+  border-radius: 2px;
+}
+
+.quiz-play h1,
+.motus-play h1,
+.definition-play h1,
+.daily-sheet h1,
+.room-lobby h1 {
+  color: var(--seyes-dynamic-ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 900;
+  letter-spacing: -0.045em;
+}
+
+.quiz-play h1 em,
+.motus-play h1 em,
+.definition-play h1 em,
+.daily-sheet h1 em,
+.room-lobby h1 em {
+  color: var(--seyes-dynamic-blue);
+  text-decoration: underline wavy var(--seyes-dynamic-red);
+  text-underline-offset: 6px;
+}
+
+.quiz-play .quiz-context,
+.motus-play .motus-objective,
+.definition-play .definition-intro,
+.daily-sheet .daily-subtitle,
+.room-lobby > p {
+  color: #535e6d;
+  font-family: "Caveat", cursive;
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+.quiz-play .answer-choice,
+.definition-play .match-word,
+.definition-play .match-definition,
+.daily-sheet .daily-goal,
+.daily-sheet .daily-rules,
+.room-main .room-revealed-answer,
+.room-main .room-revealed-solutions,
+.room-main .player-activity {
+  background: var(--seyes-dynamic-paper);
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 rgba(29, 36, 48, 0.1);
+}
+
+.quiz-play .answer-choice,
+.definition-play .match-word,
+.definition-play .match-definition {
+  border-color: rgba(29, 36, 48, 0.32);
+  transition:
+    border-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out),
+    transform 160ms var(--ease-out),
+    background 160ms var(--ease-out);
+}
+
+.quiz-play .answer-choice:hover:not(:disabled),
+.quiz-play .answer-choice:focus-visible,
+.definition-play .match-word:hover:not(:disabled),
+.definition-play .match-word:focus-visible,
+.definition-play .match-definition:hover:not(:disabled),
+.definition-play .match-definition:focus-visible {
+  border-color: var(--seyes-dynamic-blue);
+  box-shadow: 4px 4px 0 rgba(90, 81, 186, 0.23);
+  transform: translate(-1px, -1px);
+}
+
+.quiz-play .answer-choice.is-selected,
+.definition-play .match-word.is-selected {
+  border-color: var(--seyes-dynamic-blue);
+  background: linear-gradient(
+    90deg,
+    rgba(236, 233, 255, 0.96),
+    rgba(255, 253, 245, 0.92)
+  );
+  box-shadow:
+    inset 4px 0 0 var(--seyes-dynamic-blue),
+    3px 3px 0 rgba(90, 81, 186, 0.16);
+}
+
+.quiz-play .answer-choice.is-correct,
+.definition-play .match-word.is-correct {
+  border-color: #347457;
+  background: linear-gradient(
+    90deg,
+    rgba(224, 244, 226, 0.96),
+    rgba(255, 253, 245, 0.94)
+  );
+  box-shadow: inset 4px 0 0 #347457;
+}
+
+.quiz-play .answer-choice.is-wrong,
+.definition-play .match-word.is-wrong,
+.definition-play .match-definition.is-wrong {
+  border-color: var(--seyes-dynamic-red);
+  background: rgba(255, 237, 235, 0.94);
+}
+
+.quiz-play .quiz-stamp,
+.definition-play .definition-feedback b,
+.motus-play .motus-result > p:first-child,
+.daily-completion .mini-label,
+.room-revealed-answer b {
+  display: inline-block;
+  color: #31704d;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+}
+
+.quiz-play .quiz-trace.is-wrong .quiz-stamp,
+.definition-play .definition-feedback b,
+.motus-result.lost > p:first-child {
+  color: #ad3b33;
+}
+
+.motus-play .motus-grid,
+.room-motus .motus-grid {
+  filter: drop-shadow(3px 4px 0 rgba(29, 36, 48, 0.08));
+}
+
+.motus-play .motus-cell.is-typing,
+.room-motus .motus-cell.is-typing {
+  border-color: var(--seyes-dynamic-blue);
+  box-shadow:
+    inset 0 -4px 0 var(--seyes-dynamic-blue),
+    0 2px 0 rgba(90, 81, 186, 0.18);
+}
+
+.motus-play .keyboard,
+.room-motus .multiplayer-keyboard {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 253, 245, 0.94),
+    rgba(242, 240, 232, 0.96)
+  );
+  border-top: 2px solid var(--seyes-dynamic-line);
+  border-bottom: 2px solid var(--seyes-dynamic-line);
+}
+
+.motus-play .key,
+.room-motus .multiplayer-key {
+  border-radius: 3px;
+  box-shadow: 1px 2px 0 rgba(29, 36, 48, 0.15);
+}
+
+/* Entrée multijoueur : carnet de table, onglets et fiches plutôt que panneaux utilitaires. */
+.multiplayer-access-page,
+.multiplayer-setup {
+  position: relative;
+}
+
+.multiplayer-access-page::after,
+.multiplayer-setup::after {
+  position: absolute;
+  top: 64px;
+  bottom: 22px;
+  left: -22px;
+  width: 2px;
+  background: var(--seyes-dynamic-red);
+  content: "";
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.multiplayer-kicker,
+.multiplayer-setup .room-sheet-label,
+.multiplayer-setup .room-customization legend,
+.open-tables-notebook .mini-label {
+  color: var(--seyes-dynamic-blue);
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.multiplayer-mode-switch {
+  gap: 5px;
+  padding-top: 2px;
+}
+
+.multiplayer-mode-switch a,
+.public-mode-tabs button {
+  border-radius: 6px 6px 2px 2px;
+  transform-origin: bottom center;
+}
+
+.multiplayer-mode-switch a:not(.is-active):hover,
+.public-mode-tabs button:not(.is-active):hover {
+  transform: translateY(-2px);
+}
+
+.multiplayer-setup .room-sheet,
+.multiplayer-setup .join-sheet,
+.multiplayer-setup .public-rooms,
+.multiplayer-access-choice > a {
+  position: relative;
+  overflow: visible;
+  background: var(--seyes-dynamic-paper);
+  border-radius: 5px;
+  box-shadow: var(--seyes-dynamic-shadow);
+}
+
+.multiplayer-setup .room-sheet::before,
+.multiplayer-setup .join-sheet::before,
+.multiplayer-access-choice > a::before {
+  position: absolute;
+  top: -4px;
+  right: 21px;
+  width: 42px;
+  height: 8px;
+  background: rgba(235, 232, 255, 0.9);
+  border: 1px solid rgba(90, 81, 186, 0.25);
+  border-radius: 1px;
+  content: "";
+  opacity: 0.78;
+  transform: rotate(-2deg);
+}
+
+.room-pack-grid button,
+.room-variants button,
+.setting-options button,
+.joker-toggle-grid button,
+.public-rooms > button {
+  border-radius: 3px;
+  transition:
+    transform 150ms var(--ease-out),
+    box-shadow 150ms var(--ease-out),
+    border-color 150ms var(--ease-out),
+    background 150ms var(--ease-out);
+}
+
+.room-pack-grid button:hover,
+.room-variants button:hover,
+.setting-options button:hover,
+.joker-toggle-grid button:hover,
+.public-rooms > button:hover {
+  transform: translate(-1px, -1px);
+}
+
+.room-pack-grid button.is-active,
+.room-variants button.is-active,
+.setting-options button.is-active,
+.joker-toggle-grid button.is-selected {
+  box-shadow:
+    inset 4px 0 0 var(--seyes-dynamic-blue),
+    3px 3px 0 rgba(90, 81, 186, 0.18);
+}
+
+.room-primary,
+.ready-button,
+.multiplayer-setup .desktop-create-submit {
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 var(--seyes-dynamic-blue);
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out),
+    background 160ms var(--ease-out);
+}
+
+.room-primary:not(:disabled):hover,
+.ready-button:not(:disabled):hover,
+.multiplayer-setup .desktop-create-submit:not(:disabled):hover {
+  box-shadow: 6px 6px 0 rgba(29, 36, 48, 0.9);
+  transform: translate(-2px, -2px);
+}
+
+/* Salle partagée : une même table illustrée pour l’hôte et chaque participant. */
+.room-stage .room-shell {
+  position: relative;
+  align-items: start;
+}
+
+.room-stage .room-side,
+.room-stage .room-main {
+  background-color: rgba(255, 253, 245, 0.86);
+  background-image: repeating-linear-gradient(
+    var(--seyes-dynamic-line) 0,
+    var(--seyes-dynamic-line) 1px,
+    transparent 1px,
+    transparent 32px
+  );
+}
+
+.room-stage .room-side {
+  position: relative;
+  border: 1px solid rgba(29, 36, 48, 0.28);
+  border-radius: 5px;
+  box-shadow: 4px 5px 0 rgba(29, 36, 48, 0.12);
+}
+
+.room-stage .room-side::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background: var(--seyes-dynamic-red);
+  content: "";
+  opacity: 0.54;
+  pointer-events: none;
+}
+
+.room-stage .room-side > * {
+  position: relative;
+  z-index: 1;
+}
+
+.room-title-block h2 {
+  color: var(--seyes-dynamic-ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 24px;
+}
+
+.room-code,
+.room-code-label,
+.room-meta-rail,
+.room-players > div,
+.room-copy,
+.room-qr,
+.room-leave-button,
+.host-governance {
+  border-radius: 3px;
+}
+
+.room-code {
+  color: var(--seyes-dynamic-blue);
+  background: rgba(235, 232, 255, 0.78);
+  border-color: rgba(90, 81, 186, 0.44);
+  box-shadow: 2px 2px 0 rgba(90, 81, 186, 0.18);
+  font-family: "IBM Plex Mono", monospace;
+  letter-spacing: 0.14em;
+}
+
+.room-players > div.is-me,
+.room-meta-rail,
+.room-preparation,
+.lobby-share,
+.host-governance {
+  background: rgba(255, 253, 245, 0.86);
+  border-color: rgba(90, 81, 186, 0.34);
+}
+
+.room-players > div.is-me {
+  box-shadow: inset 3px 0 0 var(--seyes-dynamic-blue);
+}
+
+.room-preparation,
+.lobby-share,
+.room-main .room-lobby,
+.final-leaderboard {
+  border-radius: 5px;
+  box-shadow: var(--seyes-dynamic-shadow);
+}
+
+.host-governance {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 10px;
+  border: 1px dashed rgba(90, 81, 186, 0.54);
+  box-shadow: 2px 3px 0 rgba(90, 81, 186, 0.14);
+}
+
+.host-governance > div:first-child {
+  display: grid;
+  gap: 2px;
+}
+
+.host-governance > div:first-child b {
+  color: var(--seyes-dynamic-ink);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 18px;
+}
+
+.host-governance > div:first-child span {
+  color: #596374;
+  font-family: "Caveat", cursive;
+  font-size: 17px;
+  line-height: 1.15;
+}
+
+.host-transfer-list,
+.host-governance-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.host-transfer-list button,
+.host-governance-actions button {
+  min-height: 30px;
+  padding: 6px 8px;
+  border-radius: 3px;
+  box-shadow: 1px 2px 0 rgba(29, 36, 48, 0.12);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+}
+
+.host-transfer-list button:hover:not(:disabled),
+.host-governance-actions button:hover:not(:disabled) {
+  transform: translate(-1px, -1px);
+}
+
+.host-governance .host-close-session {
+  color: #a43d35;
+  border-color: rgba(212, 72, 61, 0.48);
+  background: rgba(255, 239, 236, 0.92);
+}
+
+.room-preparation .ready-list > span.is-ready,
+.lobby-seat.is-ready {
+  border-color: #4e8a67;
+  background: rgba(225, 244, 228, 0.9);
+}
+
+.room-preparation .ready-list > span:not(.is-ready),
+.lobby-seat.is-waiting {
+  background: rgba(255, 249, 224, 0.88);
+}
+
+.lobby-table {
+  background: transparent;
+}
+
+.lobby-table-felt {
+  background: radial-gradient(
+    circle at 50% 32%,
+    rgba(241, 239, 255, 0.96),
+    rgba(225, 221, 247, 0.94)
+  );
+  border: 2px dashed rgba(90, 81, 186, 0.46);
+  border-radius: 9px;
+  box-shadow: 4px 5px 0 rgba(90, 81, 186, 0.15);
+}
+
+.lobby-table-felt::after {
+  display: block;
+  margin-top: 2px;
+  color: var(--seyes-dynamic-red);
+  font-family: "Caveat", cursive;
+  font-size: 17px;
+  content: "Table en préparation";
+  transform: rotate(-2deg);
+}
+
+.lobby-seat {
+  border-radius: 4px;
+  box-shadow: 2px 3px 0 rgba(29, 36, 48, 0.12);
+  transition:
+    transform 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out),
+    border-color 160ms var(--ease-out);
+}
+
+.lobby-seat.is-viewer {
+  border-color: var(--seyes-dynamic-blue);
+  box-shadow: 3px 4px 0 rgba(90, 81, 186, 0.25);
+}
+
+.lobby-seat.is-empty:not(:disabled):hover {
+  border-color: var(--seyes-dynamic-blue);
+  box-shadow: 4px 4px 0 rgba(90, 81, 186, 0.2);
+  transform: translate(-1px, -1px);
+}
+
+.room-main .joker-dock,
+.room-main .reward-inventory,
+.room-main .trade-dock,
+.room-main .player-activity,
+.room-main .final-leaderboard {
+  background-color: rgba(255, 253, 245, 0.92);
+  background-image: repeating-linear-gradient(
+    var(--seyes-dynamic-line) 0,
+    var(--seyes-dynamic-line) 1px,
+    transparent 1px,
+    transparent 22px
+  );
+  border-color: rgba(29, 36, 48, 0.31);
+  border-radius: 5px;
+}
+
+.room-main .joker-dock::before,
+.reward-inventory .mini-label,
+.trade-dock .mini-label,
+.final-leaderboard > p {
+  color: var(--seyes-dynamic-blue);
+  font-family: "Caveat", cursive;
+  font-size: 20px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.room-main .joker-button,
+.reward-slots button,
+.trade-dock button,
+.room-secondary,
+.room-end {
+  border-radius: 3px;
+  box-shadow: 2px 2px 0 rgba(29, 36, 48, 0.12);
+}
+
+.room-system-announcement,
+.effect-notice {
+  border-left: 4px solid var(--seyes-dynamic-red);
+  border-radius: 3px;
+  box-shadow: var(--seyes-dynamic-shadow);
+}
+
+.final-leaderboard li.is-me {
+  box-shadow: inset 3px 0 0 var(--seyes-dynamic-blue);
+}
+
+/* Variantes nuit : conserver la lisibilité de l’encre et des lignes. */
+.dark .room-stage .room-side,
+.dark .room-stage .room-main,
+.dark .room-main .joker-dock,
+.dark .room-main .reward-inventory,
+.dark .room-main .trade-dock,
+.dark .room-main .player-activity,
+.dark .room-main .final-leaderboard {
+  background-color: rgba(22, 26, 34, 0.96);
+  background-image: repeating-linear-gradient(
+    rgba(155, 146, 255, 0.2) 0,
+    rgba(155, 146, 255, 0.2) 1px,
+    transparent 1px,
+    transparent 32px
+  );
+  border-color: rgba(190, 186, 255, 0.45);
+}
+
+.dark .room-title-block h2,
+.dark .quiz-play h1,
+.dark .motus-play h1,
+.dark .definition-play h1,
+.dark .daily-sheet h1,
+.dark .room-lobby h1 {
+  color: #f4f1e8;
+}
+
+.dark .quiz-play .answer-choice,
+.dark .definition-play .match-word,
+.dark .definition-play .match-definition,
+.dark .room-preparation,
+.dark .lobby-share,
+.dark .host-governance,
+.dark .lobby-seat,
+.dark .lobby-table-felt {
+  background: rgba(29, 34, 44, 0.96);
+  border-color: rgba(189, 185, 255, 0.44);
+}
+
+@media (max-width: 760px) {
+  .multiplayer-access-page::after,
+  .multiplayer-setup::after {
+    display: none;
+  }
+
+  .multiplayer-access-choice > a,
+  .multiplayer-setup .room-sheet,
+  .multiplayer-setup .join-sheet,
+  .multiplayer-setup .public-rooms {
+    box-shadow: 3px 3px 0 rgba(29, 36, 48, 0.12);
+  }
+
+  .room-stage .room-side::before {
+    left: 13px;
+  }
+
+  .room-stage .room-side,
+  .room-stage .room-main {
+    border-radius: 4px;
+  }
+
+  .quiz-play::before,
+  .motus-play::before,
+  .definition-play::before,
+  .daily-sheet::before,
+  .room-main > .room-lobby::before {
+    right: 20px;
+    width: 12px;
+    height: 34px;
+    border-width: 2px;
+  }
+
+  .lobby-table-felt::after {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .multiplayer-access-choice > a,
+  .multiplayer-setup .room-sheet,
+  .multiplayer-setup .join-sheet,
+  .multiplayer-setup .public-rooms,
+  .room-main .room-lobby,
+  .room-preparation {
+    animation: seyes-dynamic-rise 260ms var(--ease-out) both;
+  }
+
+  @keyframes seyes-dynamic-rise {
+    from {
+      opacity: 0.01;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-play .answer-choice,
+  .definition-play .match-word,
+  .definition-play .match-definition,
+  .room-primary,
+  .ready-button,
+  .multiplayer-setup .desktop-create-submit,
+  .lobby-seat,
+  .room-pack-grid button,
+  .room-variants button,
+  .setting-options button,
+  .joker-toggle-grid button,
+  .public-rooms > button {
+    transition: none;
+  }
+}
